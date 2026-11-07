@@ -56,6 +56,12 @@ p, li { overflow-wrap: anywhere; }
   color: var(--sobre-destaque); background: var(--destaque);
   padding: 12px 26px; border-radius: 8px;
 }
+ul.lista { list-style: none; display: flex; flex-direction: column; gap: calc(30px * var(--e)); }
+ul.lista li { display: flex; gap: 26px; font-size: calc(48px * var(--e)); line-height: 1.26; color: var(--corpo); }
+ul.lista li::before {
+  content: ""; flex: 0 0 28px; height: 28px; margin-top: calc(16px * var(--e));
+  background: var(--ac); border-radius: 50%;
+}
 .traco { flex: none; width: 120px; height: 10px; background: var(--ac); border-radius: 5px; }
 {% block css %}{% endblock %}
 </style>

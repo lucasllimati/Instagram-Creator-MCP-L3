@@ -1,6 +1,6 @@
 # Subida gradual de volume. É uma precaução do projeto, não uma regra da Meta.
 # `inicio` é uma data AAAA-MM-DD. Enquanto for null, vale o volume da semana 1.
-inicio: null
+inicio: 2026-11-09
 
 semanas:
   1: { dias: [0, 2, 4], stories: false } # seg, qua, sex

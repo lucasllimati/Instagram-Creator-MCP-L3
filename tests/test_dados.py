@@ -137,6 +137,17 @@ def test_rotulo_final_nao_cobre_a_linha_em_alta():
     assert grafico.lado_rotulo(pontos) == "acima"
 
 
+def test_eixo_mostra_o_ano_inicial_quando_a_serie_comeca_em_janeiro():
+    pontos = [{"data": "2025-01-01", "valor": 0.2}, {"data": "2026-09-01", "valor": 0.8}]
+    svg = grafico.svg_serie(pontos, CORES, degrau=False)
+    assert ">2025<" in svg and ">2026<" in svg
+
+
+def test_eixo_nao_mostra_ano_anterior_ao_inicio_da_serie():
+    pontos = [{"data": "2024-03-01", "valor": 0.2}, {"data": "2026-09-01", "valor": 0.8}]
+    assert ">2024<" not in grafico.svg_serie(pontos, CORES, degrau=False)
+
+
 def test_svg_com_um_ponto_nao_quebra():
     assert "<svg" in grafico.svg_serie([{"data": "2026-01-01", "valor": 10.0}], CORES, degrau=True)
 

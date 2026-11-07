@@ -3,7 +3,16 @@
     {
       "tema_slug": "poupanca-tesouro-selic-cdb",
       "data": "2026-11-07"
+    },
+    {
+      "tema_slug": "inflacao-poder-de-compra",
+      "data": "2026-11-09"
     }
   ],
-  "MKT": []
+  "MKT": [
+    {
+      "tema_slug": "funil-de-vendas",
+      "data": "2026-11-09"
+    }
+  ]
 }

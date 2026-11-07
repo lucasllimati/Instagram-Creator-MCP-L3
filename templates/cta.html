@@ -14,5 +14,6 @@ h2 { font-size: calc({{ tamanho_titulo }}px * var(--e)); }
 <div class="traco"></div>
 <h2>{{ slide.titulo }}</h2>
 {% if slide.texto %}<p class="resumo">{{ slide.texto }}</p>{% endif %}
+{% include "_lista.html" %}
 {% if slide.cta %}<p class="chamada">{{ slide.cta }}</p>{% endif %}
 {% endblock %}

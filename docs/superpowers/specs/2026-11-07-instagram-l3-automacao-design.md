@@ -27,6 +27,7 @@ O projeto está pronto quando:
 | Hospedagem | Repositório público `l3-media`, recebendo imagens só no momento de publicar; o repositório do projeto continua privado |
 | Visual | Mantém a identidade dos avatares (seção 8) |
 | Volume | Rampa: semana 1 com 3 posts por conta, semana 2 com 5, depois 7; stories a partir da semana 3 |
+| Atualidades | Radar diário sem IA, atualidades na pauta semanal e trilha de eventos com gráfico de dados oficiais (seção 13) |
 
 ## 3. Correções ao prompt original
 
@@ -310,3 +311,102 @@ Guiadas por `docs/setup-meta.md`:
 4. Agentes, skills, hooks e histórico.
 5. Primeira geração de semana com `/semana`, sem publicar, e teste de viabilidade da rotina na nuvem.
 6. Configuração da Meta com Lucas, teste real e início da rampa.
+7. Radar, dados econômicos, gráficos e trilha de eventos (seção 13), depois que o fluxo básico estiver publicando.
+
+## 13. Atualidades, dados e eventos
+
+Adicionado em 2026-11-07, a pedido de Lucas: complementar os temas fixos com o que está repercutindo nos dois nichos e, em FIN, mostrar decisões como a da Selic com o que aconteceu, o impacto e um gráfico histórico.
+
+### Três níveis
+
+| Nível | Exemplo | Como entra | Aprovação |
+|---|---|---|---|
+| Radar | Manchetes do dia | `radar.yml` diário, sem IA, grava `pesquisa/radar/AAAA-MM-DD.json` | Nenhuma, pois não publica nada |
+| Atualidade | Mudança em plataforma, notícia da semana | O Pesquisador usa o radar; a Pauta troca até 2 temas fixos por semana em cada perfil | PR semanal |
+| Evento | Decisão do Copom, IPCA | `/evento <tipo>` gera um post em branch própria | PR próprio, com merge no mesmo dia |
+
+### Radar
+
+`radar.py` lê a lista em `config/fontes.yaml`, remove duplicatas pela URL e pontua por palavras-chave de cada perfil. Grava só título, fonte, link e data, limitado às 20 melhores entradas por perfil. O Pesquisador lê esse arquivo em vez de procurar do zero, o que reduz buscas e tokens.
+
+Fontes testadas em 2026-11-07, retornando RSS válido a partir desta máquina:
+
+| Perfil | Fonte | Feed |
+|---|---|---|
+| FIN | Agência Brasil | `https://agenciabrasil.ebc.com.br/rss/ultimasnoticias/feed.xml` |
+| MKT | Meta Newsroom | `https://about.fb.com/news/feed/` |
+| MKT | Google | `https://blog.google/rss/` |
+| MKT | Neil Patel Brasil | `https://neilpatel.com/br/blog/feed/` |
+| MKT | Rock Content | `https://rockcontent.com/br/blog/feed/` |
+
+A falha de uma fonte só gera aviso no radar. Sem feed confirmado: IBGE (403), RD Station e Google Search Central. A execução pelo GitHub Actions ainda precisa ser testada, pois os sites podem tratar esses IPs de outra forma.
+
+**Texto de feed é dado não confiável.** Agentes nunca seguem instruções vindas dele. O radar guarda só os campos acima, e os agentes de conteúdo não têm acesso a tokens.
+
+### Dados e gráficos
+
+`dados_economicos.py` usa a API SGS do Banco Central e grava em `dados/`:
+
+| Série | Código SGS | Teste em 2026-11-07 |
+|---|---|---|
+| Selic meta (% a.a.) | 432 | OK: 13,75% vigente; mudanças detectadas desde 2024 |
+| IPCA mensal (%) | 433 | OK: último dado de 09/2026 |
+
+- **Datas futuras:** a série 432 retornou datas até 09/12/2026. O script descarta tudo depois de hoje, com teste específico.
+- **Sem número digitado por IA:** `grafico.py` gera o gráfico direto do arquivo de dados. `post.json` traz `dados_ref` com série, período e data da coleta, e o validador confere os números declarados contra o arquivo.
+- **Fonte visível:** cada gráfico exibe, por exemplo, "Fonte: Banco Central, SGS série 432, coletado em DD/MM/AAAA".
+- **Termos de uso:** o portal indica uma página de direitos autorais que ainda não foi lida. Ler antes da primeira publicação e ajustar o crédito, se preciso.
+
+### Modelo do post de Copom
+
+1. Capa: "Copom [manteve, subiu ou cortou] a Selic: [X]%".
+2. O que aconteceu.
+3. Gráfico do histórico.
+4. Por que importa, em linguagem simples.
+5. Impacto por categoria: crédito, renda fixa, poupança.
+6. O que observar a seguir, citando o que o próprio Copom comunicou.
+7. Resumo e CTA.
+
+**Limites:** sem previsão própria da Selic, sem indicar produto ou ativo, sem tom de urgência, com o aviso legal na legenda.
+
+### Fluxo de evento
+
+1. `config/calendario_economico.yaml` guarda as datas de Copom e IPCA. O preenchimento é manual, a partir do site oficial, porque não foi encontrada uma API de calendário e a página do Banco Central não abriu na leitura automática.
+2. A Pauta **não agenda post fixo em FIN no dia seguinte ao Copom**. Essa vaga fica reservada ao evento.
+3. Depois da decisão, Lucas roda `/evento copom` ou a rotina agendada dispara. Uma alta ou corte aparece na série 432, mas uma manutenção não necessariamente, por isso o resultado precisa ser confirmado no comunicado oficial.
+4. O CI valida, e o PR indica o prazo de merge.
+5. Em dias de evento, FIN tem duas tentativas de publicação: 08:30 e 18:00 BRT. A das 18:00 só publica posts de evento.
+6. Sem merge até 18:00, nada é publicado naquela vaga e o post vence. É o comportamento seguro, e nenhum evento vai ao ar sem aprovação.
+
+Uma notícia sem data prevista segue o mesmo fluxo por `/noticia <id-do-radar>`. Como ela não tem vaga reservada, o post de evento tem prioridade sobre o post fixo do dia, que passa a `adiado` e volta para a pauta. O teto de 1 post por dia continua valendo, e posts de evento contam na rampa.
+
+### Regras adicionais de conteúdo
+
+- Só fatos, com palavras próprias. Sem copiar texto ou imagem de notícia. Fonte citada por nome na legenda ou no slide.
+- Afirmação relevante exige fonte primária ou duas fontes independentes.
+- O slide mostra a data dos dados.
+- Campo obrigatório `valido_ate`: **o publicador se recusa a publicar depois dessa data**. Assim, uma notícia velha nunca vai ao ar por atraso.
+- Em MKT, mudança de plataforma cita a fonte oficial e o ano.
+
+### Componentes adicionais
+
+| Tipo | Itens |
+|---|---|
+| Scripts | `radar.py`, `dados_economicos.py`, `grafico.py` |
+| Configuração | `fontes.yaml`, `calendario_economico.yaml` |
+| Workflow | `radar.yml` (diário, 07:00 BRT) |
+| Skills | `/evento`, `/noticia` |
+| Template | `grafico.html` |
+| Validadores | `valido_ate`, `dados_ref`, fonte citada em posts de atualidade |
+| Testes | Feed fora do ar ou malformado, duplicatas, texto de feed com instrução embutida, corte de datas futuras, divergência entre post e dados, prioridade de evento, vencimento do post, tentativa das 18:00 |
+
+O acréscimo estimado é de cerca de 60 minutos por mês de Actions.
+
+### Riscos adicionais
+
+| Risco | Resposta |
+|---|---|
+| Interpretação errada de uma decisão | Dado da série no gráfico, comunicado oficial como fonte e merge humano |
+| Rotina noturna falhar | `/evento` manual; sem post, a conta só fica sem publicação naquele dia |
+| API do Banco Central fora do ar | Sem dado atualizado, o `/evento` falha e explica o motivo; nunca usa número de memória |
+| Tempo de Lucas acima de 15 min/semana em semanas de evento | Copom ocorre cerca de 8 vezes por ano; cada PR de evento exige revisão curta |

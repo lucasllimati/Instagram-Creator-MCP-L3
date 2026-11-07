@@ -1,0 +1,10 @@
+# Preenchimento manual a partir das fontes oficiais:
+#   Copom: https://www.bcb.gov.br/controleinflacao/calendarioreunioescopom
+#   IPCA:  https://www.ibge.gov.br/calendario-de-divulgacao.html
+#
+# `data` é o dia em que a decisão ou o dado é divulgado.
+# A vaga de FIN no dia seguinte fica reservada ao post de evento.
+# `confirmado: false` significa que falta conferir na fonte oficial.
+eventos:
+  # Inferido do fim da série 432 do SGS, que vai até 09/12/2026.
+  - { tipo: copom, data: 2026-12-09, confirmado: false }

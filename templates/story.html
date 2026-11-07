@@ -1,0 +1,12 @@
+{% extends "_base.html" %}
+{% block css %}
+.area { justify-content: center; gap: calc(56px * var(--e)); }
+.texto { font-family: "Montserrat", sans-serif; font-weight: 800; font-size: calc(96px * var(--e)); line-height: 1.1; letter-spacing: -0.02em; }
+.arroba { font-size: 42px; font-weight: 600; }
+{% endblock %}
+{% block conteudo %}
+<span class="etiqueta">{{ rotulo_story }}</span>
+<p class="texto">{{ story.texto }}</p>
+<p class="arroba">{{ marca.arroba }}</p>
+{% endblock %}
+{% block rodape %}{% endblock %}

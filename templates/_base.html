@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<style>
+@font-face { font-family: "Inter"; src: url("{{ fontes.inter }}") format("truetype"); font-weight: 100 900; }
+@font-face { font-family: "Montserrat"; src: url("{{ fontes.montserrat }}") format("truetype"); font-weight: 100 900; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --e: 1; /* escala de texto, reduzida pelo render só se não couber */
+  --principal: {{ cores.principal }};
+  --fundo: {{ cores.fundo }};
+  --destaque: {{ cores.destaque }};
+  --sobre-destaque: {{ cores.texto_sobre_destaque }};
+}
+html, body { width: {{ largura }}px; height: {{ altura }}px; overflow: hidden; }
+body {
+  position: relative;
+  font-family: "Inter", sans-serif;
+  background: var(--bg);
+  color: var(--tx);
+  -webkit-font-smoothing: antialiased;
+}
+.sup-principal {
+  --bg: {{ cores.principal }};
+  --tx: {{ cores.texto_sobre_principal }};
+  --corpo: {{ cores.texto_sobre_principal }};
+  --ac: {{ cores.destaque_sobre_principal }};
+  --traco: {{ cores.destaque_sobre_principal }};
+}
+.sup-fundo {
+  --bg: {{ cores.fundo }};
+  --tx: {{ cores.texto_sobre_fundo }};
+  --corpo: {{ cores.corpo_sobre_fundo }};
+  --ac: {{ cores.destaque_sobre_fundo }};
+  --traco: {{ cores.destaque_sobre_fundo }};
+}
+.motivo { position: absolute; inset: 0; pointer-events: none; }
+.motivo svg { position: absolute; inset: 0; }
+.area {
+  position: absolute;
+  left: 80px; right: 80px; top: {{ margem_topo }}px; bottom: {{ margem_base }}px;
+  display: flex; flex-direction: column; overflow: hidden;
+}
+.rodape {
+  position: absolute; left: 80px; right: 80px; bottom: 54px;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 32px; font-weight: 600; color: var(--corpo);
+}
+h1, h2 { font-family: "Montserrat", sans-serif; font-weight: 800; letter-spacing: -0.02em; line-height: 1.08; overflow-wrap: anywhere; }
+p, li { overflow-wrap: anywhere; }
+.corpo { font-size: calc(56px * var(--e)); line-height: 1.32; color: var(--corpo); }
+.etiqueta {
+  align-self: flex-start;
+  font-size: 32px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--sobre-destaque); background: var(--destaque);
+  padding: 12px 26px; border-radius: 8px;
+}
+.traco { flex: none; width: 120px; height: 10px; background: var(--ac); border-radius: 5px; }
+{% block css %}{% endblock %}
+</style>
+</head>
+<body class="sup-{{ superficie }}">
+{% block motivo %}
+<div class="motivo">
+  {% if marca.motivo == "curva" %}
+  <svg width="{{ largura }}" height="{{ altura }}" viewBox="0 0 {{ largura }} {{ altura }}" fill="none">
+    <path d="M -40 {{ altura - 70 }} C {{ largura * 0.5 }} {{ altura - 80 }}, {{ largura * 0.85 }} {{ altura - 170 }}, {{ largura + 40 }} {{ altura - 430 }}" stroke="var(--traco)" stroke-width="10" opacity=".2"/>
+    <path d="M -40 {{ altura - 118 }} C {{ largura * 0.5 }} {{ altura - 128 }}, {{ largura * 0.86 }} {{ altura - 230 }}, {{ largura + 40 }} {{ altura - 540 }}" stroke="var(--traco)" stroke-width="10" opacity=".1"/>
+  </svg>
+  {% else %}
+  <svg width="{{ largura }}" height="{{ altura }}" viewBox="0 0 {{ largura }} {{ altura }}" fill="none">
+    <circle cx="{{ largura - 10 }}" cy="30" r="70" stroke="var(--traco)" stroke-width="18" opacity=".26"/>
+    <circle cx="{{ largura - 10 }}" cy="30" r="140" stroke="var(--traco)" stroke-width="18" opacity=".16"/>
+    <circle cx="{{ largura - 10 }}" cy="30" r="210" stroke="var(--traco)" stroke-width="18" opacity=".08"/>
+  </svg>
+  {% endif %}
+</div>
+{% endblock %}
+<main class="area">{% block conteudo %}{% endblock %}</main>
+{% block rodape %}
+<footer class="rodape"><span>{{ marca.arroba }}</span>{% if numeracao %}<span>{{ numeracao }}</span>{% endif %}</footer>
+{% endblock %}
+</body>
+</html>

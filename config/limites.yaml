@@ -1,0 +1,43 @@
+# Limites usados pelos validadores e pelo publicador. Altere aqui, não no código.
+api:
+  base: https://graph.instagram.com
+  versao: v27.0 # conferida em 2026-11-07; revisar a cada trimestre
+
+conteudo:
+  gancho_palavras: 10
+  titulo_palavras: 8
+  slide_palavras: 35
+  carrossel_max: 10
+  legenda_caracteres: 2200
+  legenda_primeira_linha: 125
+  # O prompt pede 5-10, e há relato de teto de 5 no Instagram desde 2025 (não confirmado na documentação da Meta). Exatamente 5 atende aos dois.
+  hashtags_min: 5
+  hashtags_max: 5
+  citacao_palavras_limite: 15 # a citação precisa ter MENOS que isto
+  repeticao_dias: 60
+  stories_max: 4
+
+imagem:
+  feed: [1080, 1350]
+  story: [1080, 1920]
+  tamanho_max_mb: 8
+  qualidade_jpeg: 90
+
+publicacao:
+  posts_por_dia: 1
+  cota_parada_fracao: 0.5 # para ao atingir esta fração da cota informada pela Meta
+  tentativas: 3
+  espera_base_s: 5
+  status_intervalo_s: 60 # recomendação da Meta: 1 consulta por minuto
+  status_tentativas: 5 # por até 5 minutos
+  dias_verificar_atraso: 14
+
+telegram:
+  video: true # vídeo Reels montado com os slides do carrossel
+  segundos_por_slide: 3.5
+  horarios: { FIN: "08:30", MKT: "12:30" }
+
+midia:
+  owner: lucasllimati
+  repo: l3-media
+  branch: main

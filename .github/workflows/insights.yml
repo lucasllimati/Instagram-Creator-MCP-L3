@@ -1,0 +1,32 @@
+name: Coletar insights
+
+on:
+  schedule:
+    - cron: "0 9 * * 0" # domingo, 06:00 BRT, antes da geração da semana
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  coletar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12"
+      - name: Instalar dependências
+        run: pip install -r requirements.txt
+      - name: Coletar
+        env:
+          IG_TOKEN_FIN: ${{ secrets.IG_TOKEN_FIN }}
+          IG_TOKEN_MKT: ${{ secrets.IG_TOKEN_MKT }}
+        run: python scripts/coletar_insights.py
+      - name: Salvar
+        run: |
+          git config user.name "l3-publicador[bot]"
+          git config user.email "l3-publicador@users.noreply.github.com"
+          git add relatorios/dados
+          git diff --cached --quiet || { git commit -m "Insights da semana" && git pull --rebase && git push; }

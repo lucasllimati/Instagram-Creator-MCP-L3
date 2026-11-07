@@ -1,0 +1,20 @@
+codigo: MKT
+arroba: "@l3mktdigital"
+hashtag_marca: "#l3mktdigital"
+promessa: "Marketing que dá para fazer hoje à tarde, sem agência."
+voz: Consultor prático e energético; exemplos de padaria, clínica, loja online e prestador de serviço.
+persona: Dono de pequeno negócio, freelancer ou criador iniciante, com pouco tempo e orçamento.
+aviso_legal: ""
+motivo: alvo
+cores:
+  principal: "#0A5CFF" # estimado a partir do avatar; troque se tiver o valor exato
+  fundo: "#111A3A"
+  apoio: "#FFFFFF"
+  destaque: "#FF7A2F"
+  # Texto e tons derivados de cada superfície
+  texto_sobre_principal: "#FFFFFF"
+  texto_sobre_fundo: "#FFFFFF"
+  corpo_sobre_fundo: "#D5DBF0"
+  destaque_sobre_fundo: "#FF7A2F"
+  destaque_sobre_principal: "#FFFFFF" # o laranja não tem contraste sobre o azul-vivo
+  texto_sobre_destaque: "#111A3A"

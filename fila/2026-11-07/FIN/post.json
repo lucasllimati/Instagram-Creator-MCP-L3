@@ -1,0 +1,121 @@
+{
+  "id": "FIN-2026-11-07",
+  "perfil": "FIN",
+  "data": "2026-11-07",
+  "pilar": "comparativo",
+  "formato": "carrossel",
+  "prioridade": "normal",
+  "titulo": "Poupança, Tesouro Selic e CDB: as diferenças",
+  "tema_slug": "poupanca-tesouro-selic-cdb",
+  "status": "pronto",
+  "enquete_manual": "Qual dessas três você já conhecia? Poupança / Tesouro Selic / CDB",
+  "slides": [
+    {
+      "n": 1,
+      "tipo": "capa",
+      "titulo": "Poupança, Tesouro Selic ou CDB?",
+      "texto": "Três diferenças para quem está começando"
+    },
+    {
+      "n": 2,
+      "tipo": "conteudo",
+      "titulo": "1. Liquidez: quando você resgata",
+      "itens": [
+        "Poupança: resgate a qualquer momento; o rendimento é creditado no aniversário mensal do depósito",
+        "Tesouro Selic: venda ao Tesouro em dia útil, antes do vencimento"
+      ]
+    },
+    {
+      "n": 3,
+      "tipo": "conteudo",
+      "titulo": "1. Liquidez: e no CDB?",
+      "itens": [
+        "CDB: pode ter liquidez diária ou só no vencimento, conforme o contratado",
+        "Vencimento: data em que o prazo acaba e o dinheiro volta"
+      ]
+    },
+    {
+      "n": 4,
+      "tipo": "conteudo",
+      "titulo": "2. Garantia: quem protege",
+      "itens": [
+        "Poupança: coberta pelo FGC, fundo que protege depositantes, até um limite",
+        "CDB: coberto pelo FGC quando o banco emissor é associado, até um limite",
+        "Tesouro Selic: título público, emitido pelo governo federal"
+      ]
+    },
+    {
+      "n": 5,
+      "tipo": "conteudo",
+      "titulo": "3. Rendimento",
+      "itens": [
+        "Poupança: regra definida em lei; muda com a Selic",
+        "Tesouro Selic: acompanha a Selic, taxa básica de juros do país (13,75% ao ano em 07/11/2026)",
+        "CDB: taxa fixa ou acompanhando um indicador, como a Selic"
+      ]
+    },
+    {
+      "n": 6,
+      "tipo": "conteudo",
+      "titulo": "O que observar antes de escolher",
+      "itens": [
+        "Quando você pode precisar do dinheiro",
+        "Quem garante a aplicação e até quanto",
+        "Como o rendimento é calculado",
+        "Custos e impostos que incidem"
+      ]
+    },
+    {
+      "n": 7,
+      "tipo": "cta",
+      "titulo": "Resumo",
+      "texto": "As três diferem em resgate, garantia e cálculo do rendimento. Comparar esses pontos vale mais do que olhar só o nome.",
+      "cta": "Salve para consultar depois"
+    }
+  ],
+  "stories": [
+    {
+      "tipo": "chamada",
+      "texto": "Poupança, Tesouro Selic ou CDB? Veja as diferenças no post de hoje"
+    }
+  ],
+  "fontes": [
+    {
+      "descricao": "Meta da Selic, série SGS 432",
+      "url": "https://api.bcb.gov.br/dados/serie/bcdata.sgs.432/dados?formato=json",
+      "data": "2026-11-07",
+      "veiculo": "Banco Central",
+      "primaria": true
+    }
+  ],
+  "dados_ref": {
+    "serie": 432,
+    "inicio": "2026-09-17",
+    "fim": "2026-11-07",
+    "coletado_em": "2026-11-07",
+    "valores_declarados": [
+      {
+        "data": "2026-11-07",
+        "valor": 13.75
+      }
+    ]
+  },
+  "legenda": "Poupança, Tesouro Selic ou CDB: o que muda entre eles?\n\nTrês critérios separam os três: quando você resgata, quem garante e como o rendimento é calculado.\nLiquidez é a rapidez para tirar o dinheiro. Garantia indica quem protege seu dinheiro se a instituição tiver problemas.\nA meta da Selic, taxa básica de juros do país, está em 13,75% ao ano (fonte: Banco Central, 07/11/2026). O Tesouro Selic acompanha essa taxa.\nO nome do produto diz pouco. Compare as regras antes de escolher.\n\nSalve este post para consultar quando for comparar.\n\nConteúdo educativo, não é recomendação de investimento.",
+  "hashtags": [
+    "#financaspessoais",
+    "#investimentos",
+    "#tesouroselic",
+    "#cdb",
+    "#l3investir"
+  ],
+  "alt_text": [
+    "Capa com o título 'Poupança, Tesouro Selic ou CDB?' e a frase 'Três diferenças para quem está começando'.",
+    "Slide sobre liquidez. Poupança: resgate a qualquer momento, com rendimento creditado no aniversário mensal do depósito. Tesouro Selic: venda ao Tesouro em dia útil, antes do vencimento.",
+    "Slide sobre liquidez no CDB. Pode ter liquidez diária ou só no vencimento, conforme o contratado. Vencimento é a data em que o prazo acaba e o dinheiro volta.",
+    "Slide sobre garantia. Poupança e CDB são cobertos pelo FGC, fundo que protege depositantes, até um limite; o CDB só quando o banco emissor é associado. Tesouro Selic é título público emitido pelo governo federal.",
+    "Slide sobre rendimento. Poupança segue regra definida em lei e muda com a Selic. Tesouro Selic acompanha a Selic, taxa básica de juros, de 13,75% ao ano em 07/11/2026. CDB tem taxa fixa ou acompanha um indicador, como a Selic.",
+    "Checklist com quatro itens para observar antes de escolher: quando você pode precisar do dinheiro; quem garante a aplicação e até quanto; como o rendimento é calculado; custos e impostos que incidem.",
+    "Resumo: as três diferem em resgate, garantia e cálculo do rendimento. Comparar esses pontos vale mais do que olhar só o nome. Chamada para salvar o post.",
+    "Story com a chamada 'Poupança, Tesouro Selic ou CDB? Veja as diferenças no post de hoje'."
+  ]
+}

@@ -1,0 +1,55 @@
+# Cada entrada é uma expressão regular, sem diferenciar maiúsculas.
+promessas:
+  - fique rico
+  - fica rico
+  - ficar rico
+  - enriquecer rápido
+  - renda garantida
+  - lucro garantido
+  - retorno garantido
+  - ganho garantido
+  - dinheiro fácil
+  - \d+\s?k seguidores
+  - \d+ mil seguidores em \d+ dias
+  - sem risco nenhum
+
+# Só para FIN: nomes de corretoras e bancos e frases de recomendação.
+fin_marcas:
+  - XP Investimentos
+  - BTG
+  - Nubank
+  - NuInvest
+  - Rico Investimentos
+  - Clear Corretora
+  - Itaú
+  - Bradesco
+  - Santander
+  - Banco do Brasil
+  - Caixa Econômica
+  - Binance
+  - Mercado Bitcoin
+
+fin_recomendacao:
+  - compre agora
+  - vale a pena comprar
+  - melhor investimento
+  - invista em\s+[A-Z]{4}\d
+  - recomendo (comprar|investir|vender)
+
+fin_urgencia:
+  - última chance
+  - corra
+  - não perca
+  - antes que seja tarde
+
+# Sem cerquilha, em minúsculas.
+hashtags_proibidas:
+  - love
+  - instagood
+  - fyp
+  - viral
+  - explore
+  - foryou
+  - likeforlike
+  - follow4follow
+  - seguidores

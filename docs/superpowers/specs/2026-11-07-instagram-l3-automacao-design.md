@@ -314,6 +314,17 @@ Guiadas por `docs/setup-meta.md`:
 6. Configuração da Meta com Lucas, teste real e início da rampa.
 7. Radar, dados econômicos, gráficos e trilha de eventos (seção 13), depois que o fluxo básico estiver publicando.
 
+## 14. Entrega pelo Telegram
+
+Adicionado em 2026-11-07, porque a conta de Lucas na Meta está bloqueada e com restrição, o que impede criar o app. Aprovado com vídeo para Reels.
+
+- `scripts/entregar_telegram.py` roda nos mesmos horários do publicador (workflow `telegram.yml`) e entrega no canal: cabeçalho, imagens como arquivo, vídeo Reels sem áudio (`scripts/video.py`), legenda pronta para copiar, alt text com dicas e, conforme a rampa, os stories.
+- Mesmas regras do publicador: só `main` e `status=pronto`; revalidação; validade; evento com prioridade; teto de 1 por dia; conta pausada não recebe.
+- O estado fica em `estado.json`, na chave `telegram`, com as partes já enviadas, para retomar sem repetir.
+- Post entregue entra em `historico/publicacoes.csv` com `status=entregue` e conta como tema usado.
+- Ativado por `ENTREGA_TELEGRAM=true`. Use um modo por vez: publicação automática ou Telegram.
+- Sem a API, os insights automáticos param.
+
 ## 13. Atualidades, dados e eventos
 
 Adicionado em 2026-11-07, a pedido de Lucas: complementar os temas fixos com o que está repercutindo nos dois nichos e, em FIN, mostrar decisões como a da Selic com o que aconteceu, o impacto e um gráfico histórico.

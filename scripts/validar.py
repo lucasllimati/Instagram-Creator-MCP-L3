@@ -249,7 +249,7 @@ def _livros(post, ctx, campos) -> list[Erro]:
 def _repeticao(post, ctx) -> list[Erro]:
     dias = ctx.limites["conteudo"]["repeticao_dias"]
     data = comum.data_iso(post["data"])
-    candidatos = [p for p in ctx.publicacoes if p.get("status") == "publicado"] + list(ctx.fila)
+    candidatos = [p for p in ctx.publicacoes if p.get("status") in comum.STATUS_USADOS] + list(ctx.fila)
     for p in candidatos:
         if p.get("id") == post["id"] or p.get("perfil") != post["perfil"] or p.get("tema_slug") != post["tema_slug"]:
             continue

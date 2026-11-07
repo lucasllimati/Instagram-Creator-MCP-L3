@@ -99,7 +99,7 @@ def temas_recentes(publicacoes: list[dict], fila: list[dict], hoje: dt.date, dia
     limite = (hoje - dt.timedelta(days=dias)).isoformat()
     saida = {p: [] for p in comum.PERFIS}
     vistos = set()
-    fontes = [p for p in publicacoes if p.get("status") == "publicado"] + list(fila)
+    fontes = [p for p in publicacoes if p.get("status") in comum.STATUS_USADOS] + list(fila)
     for p in fontes:
         chave = (p.get("perfil"), p.get("tema_slug"), p.get("data"))
         if p.get("perfil") in saida and p.get("data", "") >= limite and chave not in vistos:

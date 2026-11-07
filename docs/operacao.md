@@ -8,8 +8,17 @@
 | Domingo, 06:00 | Actions | Coleta de insights |
 | Domingo | Claude | `/semana`, que abre o PR |
 | Domingo, 10 a 15 min | Você | Revisa o PR e faz o merge |
-| Diário, 08:30 e 12:30 | Actions | Publica FIN e MKT |
+| Diário, 08:30 e 12:30 | Actions | Publica FIN e MKT, ou entrega no Telegram |
 | Diário, 18:00 | Actions | FIN: só post de evento |
+
+## Modo de entrega
+
+Ative um modo por vez, para o mesmo post não sair duas vezes.
+
+| Modo | Variável | Guia |
+|---|---|---|
+| Publicação automática pela API | `PUBLICACAO_ATIVA=true` | `docs/setup-meta.md` |
+| Entrega no Telegram para postar à mão | `ENTREGA_TELEGRAM=true` | `docs/setup-telegram.md` |
 | Dia 1 de cada mês | Actions | Renova os tokens |
 
 ## Revisar o PR da semana
@@ -62,6 +71,10 @@ O GitHub não aceitou o commit, e o post não foi publicado. Republique manualme
 ### "Falha ao renovar tokens"
 
 Rode **Actions > Renovar tokens** de novo. Se o token já expirou, gere outro no painel da Meta. Confira também a validade do `SECRETS_PAT`.
+
+### "Falha ao enviar ... ao Telegram"
+
+A issue lista as partes já enviadas, e a próxima execução continua de onde parou. Para não esperar o dia seguinte, rode **Actions > Entregar no Telegram** com a data do post. Erro `HTTP 401` indica token do bot errado; erro `HTTP 400` com "chat not found" indica ID do canal errado ou bot sem permissão de administrador.
 
 ### Container `falhou`
 

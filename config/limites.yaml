@@ -32,6 +32,11 @@ publicacao:
   status_tentativas: 5 # por até 5 minutos
   dias_verificar_atraso: 14
 
+telegram:
+  video: true # vídeo Reels montado com os slides do carrossel
+  segundos_por_slide: 3.5
+  horarios: { FIN: "08:30", MKT: "12:30" }
+
 midia:
   owner: lucasllimati
   repo: l3-media

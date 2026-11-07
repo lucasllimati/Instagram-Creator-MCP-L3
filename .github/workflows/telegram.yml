@@ -1,0 +1,68 @@
+name: Entregar no Telegram
+
+on:
+  schedule:
+    - cron: "30 11 * * *" # 08:30 BRT: FIN
+    - cron: "30 15 * * *" # 12:30 BRT: MKT
+    - cron: "0 21 * * *" # 18:00 BRT: FIN, só posts de evento
+  workflow_dispatch:
+    inputs:
+      perfil:
+        description: Perfil
+        type: choice
+        options: [FIN, MKT]
+        required: true
+      dry_run:
+        description: Só simular
+        type: boolean
+        default: false
+      janela:
+        description: Janela
+        type: choice
+        options: [normal, evento]
+        default: normal
+      data:
+        description: Entregar outro dia (AAAA-MM-DD); vazio para hoje
+        type: string
+        required: false
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: telegram-${{ inputs.perfil || (github.event.schedule == '30 15 * * *' && 'MKT' || 'FIN') }}
+  cancel-in-progress: false
+
+jobs:
+  entregar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12"
+      - name: Instalar dependências
+        run: pip install -r requirements.txt
+      - name: Configurar autor dos commits
+        run: |
+          git config user.name "l3-telegram[bot]"
+          git config user.email "l3-telegram@users.noreply.github.com"
+      - name: Entregar
+        env:
+          PERFIL: ${{ inputs.perfil || (github.event.schedule == '30 15 * * *' && 'MKT' || 'FIN') }}
+          JANELA: ${{ inputs.janela || (github.event.schedule == '0 21 * * *' && 'evento' || 'normal') }}
+          DATA: ${{ inputs.data }}
+          SIMULAR: ${{ inputs.dry_run }}
+          ENTREGA_TELEGRAM: ${{ vars.ENTREGA_TELEGRAM }}
+          GH_TOKEN: ${{ github.token }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          args=("$PERFIL" --janela "$JANELA")
+          if [ -n "$DATA" ]; then args+=(--data "$DATA"); fi
+          if [ "$SIMULAR" = "true" ]; then args+=(--dry-run); fi
+          python scripts/entregar_telegram.py "${args[@]}"

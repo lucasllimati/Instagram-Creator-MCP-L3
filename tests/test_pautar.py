@@ -108,6 +108,11 @@ def test_atualidade_pode_substituir_ate_dois_temas_por_perfil():
     assert any("atualidades" in e for e in pautar.checar_calendario(linhas, {}, GRADE))
 
 
+def test_temas_recentes_inclui_entregue_pelo_telegram():
+    pub = [{"perfil": "FIN", "tema_slug": "a", "data": "2026-10-01", "status": "entregue"}]
+    assert [t["tema_slug"] for t in pautar.temas_recentes(pub, [], dt.date(2026, 11, 7), 60)["FIN"]] == ["a"]
+
+
 def test_temas_recentes_filtra_por_janela_e_publicado():
     pub = [
         {"perfil": "FIN", "tema_slug": "a", "data": "2026-10-01", "status": "publicado"},

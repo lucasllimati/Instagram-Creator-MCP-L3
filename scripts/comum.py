@@ -12,6 +12,8 @@ import yaml
 RAIZ = Path(__file__).resolve().parents[1]
 PERFIS = ("FIN", "MKT")
 TZ = ZoneInfo("America/Sao_Paulo")
+# Publicado pela API ou entregue pelo Telegram para postagem manual: os dois contam como tema usado.
+STATUS_USADOS = {"publicado", "entregue"}
 COLUNAS_PUBLICACOES = ["id", "data", "perfil", "pilar", "tema_slug", "titulo", "media_id", "permalink", "publicado_em", "status"]
 
 

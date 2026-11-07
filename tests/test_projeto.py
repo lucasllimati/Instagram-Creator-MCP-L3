@@ -20,7 +20,7 @@ AGENTES = {
     "qa-visual": ({"Read"}, "sonnet"),
 }
 SKILLS = ["semana", "validar", "status", "post", "evento", "noticia"]
-WORKFLOWS = ["ci", "publicar", "renovar-token", "insights", "radar"]
+WORKFLOWS = ["ci", "publicar", "renovar-token", "insights", "radar", "telegram"]
 
 
 def frontmatter(caminho):
@@ -135,6 +135,14 @@ def test_horarios_de_publicacao():
     dados = yaml.safe_load((RAIZ / ".github" / "workflows" / "publicar.yml").read_text(encoding="utf-8"))
     crons = {c["cron"] for c in dados[True]["schedule"]}
     assert crons == {"30 11 * * *", "30 15 * * *", "0 21 * * *"}
+
+
+def test_telegram_usa_os_mesmos_horarios_da_publicacao():
+    def crons(nome):
+        dados = yaml.safe_load((RAIZ / ".github" / "workflows" / f"{nome}.yml").read_text(encoding="utf-8"))
+        return {c["cron"] for c in dados[True]["schedule"]}
+
+    assert crons("telegram") == crons("publicar")
 
 
 def test_publicar_tem_concorrencia_por_perfil():

@@ -10,8 +10,7 @@ conteudo:
   carrossel_max: 10
   legenda_caracteres: 2200
   legenda_primeira_linha: 125
-  # O prompt pede 5-10, e há relato de teto de 5 no Instagram desde 2025 (não
-  # confirmado na documentação da Meta). Exatamente 5 atende aos dois.
+  # O prompt pede 5-10, e há relato de teto de 5 no Instagram desde 2025 (não confirmado na documentação da Meta). Exatamente 5 atende aos dois.
   hashtags_min: 5
   hashtags_max: 5
   citacao_palavras_limite: 15 # a citação precisa ter MENOS que isto

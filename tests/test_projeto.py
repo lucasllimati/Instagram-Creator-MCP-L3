@@ -131,6 +131,12 @@ def test_workflow_nao_injeta_entrada_em_comando_de_shell(nome):
             assert "${{" not in passo.get("run", ""), passo.get("name")
 
 
+def test_ci_pode_ler_o_pr_para_procurar_segredos():
+    # O gitleaks lista os commits do PR pela API; sem isto falha com "Resource not accessible".
+    dados = yaml.safe_load((RAIZ / ".github" / "workflows" / "ci.yml").read_text(encoding="utf-8"))
+    assert dados["permissions"].get("pull-requests") == "read"
+
+
 def test_horarios_de_publicacao():
     dados = yaml.safe_load((RAIZ / ".github" / "workflows" / "publicar.yml").read_text(encoding="utf-8"))
     crons = {c["cron"] for c in dados[True]["schedule"]}

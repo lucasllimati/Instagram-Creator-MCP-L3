@@ -33,6 +33,16 @@ Educar com conteúdo que as pessoas salvam e compartilham. Essa é a métrica pr
 - Prefira tags de nicho às genéricas. Varie o bloco conforme o tema.
 - Hashtag ajuda a categorizar; palavra-chave na legenda ajuda mais na busca.
 
+## Narração (Reels)
+
+Em carrossel, o campo `narracao` traz uma fala por slide para gravar sobre o vídeo.
+
+- **Fala, não leitura:** conversa com quem assiste e complementa o slide, sem ler o texto da tela.
+- **Gancho imediato:** a primeira fala prende nos 3 primeiros segundos, com pergunta, número ou contradição.
+- **Curta:** até 30 palavras por slide. O vídeo segura cada slide pelo tempo da fala.
+- **Última fala:** o mesmo CTA do último slide.
+- As regras de compliance e de números valem igual para a fala.
+
 ## Alt text
 
 Descreva o que a imagem comunica, incluindo o texto principal. Um por imagem, na ordem: slides e depois stories. Gráfico: diga a tendência e o valor final.

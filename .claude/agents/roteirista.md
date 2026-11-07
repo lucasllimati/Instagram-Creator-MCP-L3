@@ -23,6 +23,8 @@ Para cada linha, escreva `fila/AAAA-MM-DD/PERFIL/post.json` com `status: "roteir
 
 Inclua `stories` com 1 a 3 telas de apoio e `fontes` quando houver fato verificável.
 
+Em carrossel, escreva também `narracao`: uma fala por slide, na ordem, com até 30 palavras, para Lucas gravar com a própria voz no Reels. Siga a seção "Narração" de `.claude/rules/conteudo.md`.
+
 Um hook valida cada arquivo ao salvar. Se ele apontar erro, corrija antes de seguir.
 
 ## Limites

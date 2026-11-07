@@ -35,6 +35,11 @@ LIMITE_TEXTO = 4096
 DIAS = ["seg", "ter", "qua", "qui", "sex", "sáb", "dom"]
 
 
+def _mmss(segundos: float) -> str:
+    s = int(round(segundos))
+    return f"{s // 60}:{s % 60:02d}"
+
+
 class ErroTelegram(Exception):
     pass
 
@@ -216,10 +221,27 @@ class Entregador:
             linhas.append(f"Enquete sugerida: {post['enquete_manual']}")
         return "\n".join(linhas)
 
+    def _roteiro(self, post: dict) -> str:
+        tempos = video.duracoes(post, self.cfg.get("segundos_por_slide", 3.5))
+        total = sum(tempos)
+        linhas = [
+            f"Roteiro para gravar a narração (cerca de {round(total)} s)",
+            "Grave por cima do vídeo, na ferramenta de voz do Instagram ou do CapCut. Cada slide fica na tela o tempo da fala.",
+            "",
+        ]
+        inicio = 0.0
+        for i, (fala, t) in enumerate(zip(post["narracao"], tempos), 1):
+            fim = inicio + t
+            linhas.append(f"{_mmss(inicio)}–{_mmss(fim)} · Slide {i}: {fala}")
+            inicio = fim
+        return "\n".join(linhas)
+
     def _partes(self, post: dict) -> list[str]:
         partes = ["cabecalho", "imagens"]
         if video.deve_gerar(post, self.limites):
             partes.append("video")
+            if post.get("narracao"):
+                partes.append("roteiro")
         partes += ["legenda", "apoio"]
         if post.get("stories") and rampa.stories_ativos(comum.data_iso(post["data"]), self.cfg_rampa):
             partes.append("stories")
@@ -232,8 +254,11 @@ class Entregador:
             self.telegram.enviar_documentos([pasta / f"slide_{s['n']:02d}.jpg" for s in post["slides"]])
         elif parte == "video":
             with tempfile.TemporaryDirectory() as tmp:
-                arquivo = self.gerar_video(pasta, self.marca["cores"]["principal"], Path(tmp) / f"{post['id']}.mp4", self.cfg.get("segundos_por_slide", 3.5))
+                tempos = video.duracoes(post, self.cfg.get("segundos_por_slide", 3.5))
+                arquivo = self.gerar_video(pasta, self.marca["cores"]["principal"], Path(tmp) / f"{post['id']}.mp4", tempos)
                 self.telegram.enviar_video(arquivo, "Vídeo para Reels (sem áudio)")
+        elif parte == "roteiro":
+            self.telegram.enviar_texto(self._roteiro(post))
         elif parte == "legenda":
             self.telegram.enviar_texto(publicar.legenda_final(post))
         elif parte == "apoio":

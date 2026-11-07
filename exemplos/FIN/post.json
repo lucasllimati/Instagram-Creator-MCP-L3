@@ -11,19 +11,68 @@
   "valido_ate": "2026-09-19",
   "enquete_manual": "Você já sentiu os juros mudarem no seu dia a dia? Sim / Ainda não",
   "slides": [
-    { "n": 1, "tipo": "capa", "titulo": "Copom cortou a Selic: 13,75%", "texto": "O que mudou e o que isso muda para você" },
-    { "n": 2, "tipo": "conteudo", "titulo": "O que aconteceu", "texto": "O Copom, comitê do Banco Central, reduziu a meta da Selic de 14,00% para 13,75% ao ano. A taxa nova vale desde 17/09/2026." },
-    { "n": 3, "tipo": "grafico", "titulo": "A Selic desde 2024", "serie": 432 },
-    { "n": 4, "tipo": "conteudo", "titulo": "Por que importa", "texto": "A Selic é a taxa básica de juros do país. Ela serve de referência para o custo do dinheiro em empréstimos e em aplicações." },
-    { "n": 5, "tipo": "conteudo", "titulo": "Onde o efeito aparece", "itens": ["Crédito: pode ficar um pouco mais barato, mas cada banco define sua taxa", "Renda fixa: quem acompanha a Selic tende a render menos", "Poupança: segue regra própria, ligada à Selic"] },
-    { "n": 6, "tipo": "conteudo", "titulo": "O efeito leva tempo", "texto": "Uma decisão não muda seu contrato atual da noite para o dia. Os juros do seu cartão e do seu financiamento dependem do que você contratou." },
-    { "n": 7, "tipo": "cta", "titulo": "Resumo", "texto": "A Selic caiu 0,25 ponto. O impacto no seu bolso é gradual e varia por produto.", "cta": "Salve para consultar depois" }
+    {
+      "n": 1,
+      "tipo": "capa",
+      "titulo": "Copom cortou a Selic: 13,75%",
+      "texto": "O que mudou e o que isso muda para você"
+    },
+    {
+      "n": 2,
+      "tipo": "conteudo",
+      "titulo": "O que aconteceu",
+      "texto": "O Copom, comitê do Banco Central, reduziu a meta da Selic de 14,00% para 13,75% ao ano. A taxa nova vale desde 17/09/2026."
+    },
+    {
+      "n": 3,
+      "tipo": "grafico",
+      "titulo": "A Selic desde 2024",
+      "serie": 432
+    },
+    {
+      "n": 4,
+      "tipo": "conteudo",
+      "titulo": "Por que importa",
+      "texto": "A Selic é a taxa básica de juros do país. Ela serve de referência para o custo do dinheiro em empréstimos e em aplicações."
+    },
+    {
+      "n": 5,
+      "tipo": "conteudo",
+      "titulo": "Onde o efeito aparece",
+      "itens": [
+        "Crédito: pode ficar um pouco mais barato, mas cada banco define sua taxa",
+        "Renda fixa: quem acompanha a Selic tende a render menos",
+        "Poupança: segue regra própria, ligada à Selic"
+      ]
+    },
+    {
+      "n": 6,
+      "tipo": "conteudo",
+      "titulo": "O efeito leva tempo",
+      "texto": "Uma decisão não muda seu contrato atual da noite para o dia. Os juros do seu cartão e do seu financiamento dependem do que você contratou."
+    },
+    {
+      "n": 7,
+      "tipo": "cta",
+      "titulo": "Resumo",
+      "texto": "A Selic caiu 0,25 ponto. O impacto no seu bolso é gradual e varia por produto.",
+      "cta": "Salve para consultar depois"
+    }
   ],
   "stories": [
-    { "tipo": "chamada", "texto": "A Selic mudou. Veja o que isso significa no post de hoje" }
+    {
+      "tipo": "chamada",
+      "texto": "A Selic mudou. Veja o que isso significa no post de hoje"
+    }
   ],
   "legenda": "Selic em 13,75%: entenda o que muda de verdade no seu dinheiro.\n\nA taxa básica caiu 0,25 ponto, mas isso não muda sozinho os juros do seu cartão ou do seu financiamento.\n\nO efeito chega aos poucos e depende de cada produto.\n\nSalve para consultar depois e compartilhe com quem está com dúvida.\n\nFonte: Banco Central, série SGS 432.\n\nConteúdo educativo, não é recomendação de investimento.",
-  "hashtags": ["#selic", "#copom", "#educacaofinanceira", "#jurosaltos", "#l3investir"],
+  "hashtags": [
+    "#selic",
+    "#copom",
+    "#educacaofinanceira",
+    "#jurosaltos",
+    "#l3investir"
+  ],
   "alt_text": [
     "Capa com o texto: Copom cortou a Selic, 13,75%.",
     "Texto explicando a redução da meta da Selic de 14,00% para 13,75% ao ano.",
@@ -35,7 +84,13 @@
     "Story convidando para ver o post sobre a mudança da Selic."
   ],
   "fontes": [
-    { "descricao": "Meta da Selic, série SGS 432", "url": "https://api.bcb.gov.br/dados/serie/bcdata.sgs.432/dados?formato=json", "data": "2026-11-07", "veiculo": "Banco Central", "primaria": true }
+    {
+      "descricao": "Meta da Selic, série SGS 432",
+      "url": "https://api.bcb.gov.br/dados/serie/bcdata.sgs.432/dados?formato=json",
+      "data": "2026-11-07",
+      "veiculo": "Banco Central",
+      "primaria": true
+    }
   ],
   "dados_ref": {
     "serie": 432,
@@ -43,8 +98,23 @@
     "fim": "2026-11-07",
     "coletado_em": "2026-11-07",
     "valores_declarados": [
-      { "data": "2026-09-16", "valor": 14.0 },
-      { "data": "2026-09-17", "valor": 13.75 }
+      {
+        "data": "2026-09-16",
+        "valor": 14.0
+      },
+      {
+        "data": "2026-09-17",
+        "valor": 13.75
+      }
     ]
-  }
+  },
+  "narracao": [
+    "A Selic caiu. Mas o que isso muda no seu cartão, no financiamento e no que você guarda?",
+    "O Copom, que é o comitê do Banco Central, baixou a taxa de catorze para treze vírgula setenta e cinco por cento ao ano.",
+    "Olha o caminho da Selic desde 2024: subiu até quinze por cento e agora começou a cair.",
+    "A Selic é a taxa básica de juros do país. Ela serve de referência para empréstimos e aplicações.",
+    "No crédito pode ficar um pouco mais barato. Na renda fixa que acompanha a Selic, o rendimento tende a cair.",
+    "Mas calma: o seu contrato atual não muda da noite para o dia. Vale o que você contratou.",
+    "Resumindo: a Selic caiu um quarto de ponto e o efeito chega aos poucos. Salva este vídeo para consultar depois."
+  ]
 }

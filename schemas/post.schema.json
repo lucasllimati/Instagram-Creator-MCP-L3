@@ -47,6 +47,7 @@
         }
       }
     },
+    "narracao": { "type": "array", "items": { "type": "string", "minLength": 1 } },
     "legenda": { "type": "string" },
     "hashtags": { "type": "array", "items": { "type": "string" } },
     "alt_text": { "type": "array", "items": { "type": "string" } },

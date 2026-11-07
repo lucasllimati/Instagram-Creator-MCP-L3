@@ -34,6 +34,22 @@ def test_gera_reel_vertical_com_a_duracao_esperada(tmp_path):
     assert saida.stat().st_size < 50 * 1024 * 1024
 
 
+def test_sem_narracao_todos_os_slides_tem_o_tempo_base(post):
+    assert video.duracoes(post, 3.5) == [3.5] * 6
+
+
+def test_fala_longa_estende_o_tempo_do_slide(post):
+    post["narracao"] = ["Oi."] + [" ".join(["palavra"] * 20)] + ["Oi."] * 4
+    tempos = video.duracoes(post, 3.5)
+    assert tempos[0] == 3.5
+    assert tempos[1] == 8.6  # 20 palavras / 2,5 por segundo + 0,6 de respiro
+
+
+def test_lista_aceita_um_tempo_por_quadro(tmp_path):
+    texto = video.lista_concat([tmp_path / "a.png", tmp_path / "b.png"], [2.0, 5.5])
+    assert "duration 2.0" in texto and "duration 5.5" in texto
+
+
 def test_sem_slides_gera_erro(tmp_path):
     with pytest.raises(ValueError):
         video.gerar_reel(tmp_path, "#000000", tmp_path / "reel.mp4")

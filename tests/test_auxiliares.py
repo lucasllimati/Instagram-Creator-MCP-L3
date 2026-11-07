@@ -112,7 +112,19 @@ def test_insights_erro_em_um_post_nao_derruba_a_coleta(tmp_path):
 
 
 @responses.activate
-def test_renovacao_grava_novo_token_sem_exibir(capsys):
+def test_no_actions_o_novo_token_so_aparece_no_comando_de_mascara(monkeypatch, capsys):
+    # O ::add-mask:: é o que faz o GitHub esconder o token nos logs seguintes.
+    monkeypatch.setenv("GITHUB_ACTIONS", "true")
+    responses.get("https://graph.instagram.com/refresh_access_token", json={"access_token": "NOVO", "expires_in": 5184000})
+    rt.renovar("IG_TOKEN_FIN", "VELHO", "PAT", executar=lambda *a, **k: subprocess.CompletedProcess(a, 0))
+    linhas = capsys.readouterr().out.splitlines()
+    assert linhas[0] == "::add-mask::NOVO"
+    assert not any("NOVO" in l or "VELHO" in l for l in linhas[1:])
+
+
+@responses.activate
+def test_renovacao_grava_novo_token_sem_exibir(monkeypatch, capsys):
+    monkeypatch.delenv("GITHUB_ACTIONS", raising=False)
     responses.get("https://graph.instagram.com/refresh_access_token", json={"access_token": "NOVO", "expires_in": 5184000})
     gravados = []
 

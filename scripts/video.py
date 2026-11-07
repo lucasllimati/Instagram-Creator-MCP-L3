@@ -24,6 +24,20 @@ def deve_gerar(post: dict, limites: dict) -> bool:
     return post["formato"] == "carrossel" and limites.get("telegram", {}).get("video", True)
 
 
+PALAVRAS_POR_SEGUNDO = 2.5
+RESPIRO_S = 0.6
+
+
+def duracoes(post: dict, base: float) -> list[float]:
+    """Tempo de cada slide: o da fala da narração, sem ficar abaixo do tempo base."""
+    falas = post.get("narracao") or []
+    tempos = []
+    for i in range(len(post["slides"])):
+        fala = falas[i] if i < len(falas) else ""
+        tempos.append(round(max(base, len(fala.split()) / PALAVRAS_POR_SEGUNDO + RESPIRO_S), 1))
+    return tempos
+
+
 def quadro(slide: Path, cor: str) -> Image.Image:
     fundo = Image.new("RGB", (LARGURA, ALTURA), cor)
     with Image.open(slide) as im:
@@ -33,13 +47,16 @@ def quadro(slide: Path, cor: str) -> Image.Image:
     return fundo
 
 
-def lista_concat(quadros: list[Path], segundos: float) -> str:
+def lista_concat(quadros: list[Path], segundos) -> str:
+    """`segundos` é um número para todos os quadros ou uma lista, um por quadro."""
+
     def linha(p: Path) -> str:
         return "file '" + p.as_posix().replace("'", "'\\''") + "'"
 
+    tempos = segundos if isinstance(segundos, (list, tuple)) else [segundos] * len(quadros)
     partes = []
-    for q in quadros:
-        partes += [linha(q), f"duration {segundos}"]
+    for q, t in zip(quadros, tempos):
+        partes += [linha(q), f"duration {t}"]
     return "\n".join(partes) + "\n"
 
 
@@ -49,7 +66,7 @@ def _ffmpeg() -> str:
     return imageio_ffmpeg.get_ffmpeg_exe()
 
 
-def gerar_reel(pasta: Path, cor: str, saida: Path, segundos: float = 3.5) -> Path:
+def gerar_reel(pasta: Path, cor: str, saida: Path, segundos=3.5) -> Path:
     slides = sorted(Path(pasta).glob("slide_*.jpg"))
     if not slides:
         raise ValueError(f"nenhum slide em {pasta}")
@@ -87,5 +104,5 @@ if __name__ == "__main__":
     pasta = Path(sys.argv[1])
     post = comum.ler_json(pasta / "post.json")
     saida = Path(sys.argv[2]) if len(sys.argv) > 2 else pasta / "reel.mp4"
-    segundos = comum.limites().get("telegram", {}).get("segundos_por_slide", 3.5)
-    print(gerar_reel(pasta, comum.marca(post["perfil"])["cores"]["principal"], saida, segundos))
+    base = comum.limites().get("telegram", {}).get("segundos_por_slide", 3.5)
+    print(gerar_reel(pasta, comum.marca(post["perfil"])["cores"]["principal"], saida, duracoes(post, base)))

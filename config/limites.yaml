@@ -16,6 +16,7 @@ conteudo:
   citacao_palavras_limite: 15 # a citação precisa ter MENOS que isto
   repeticao_dias: 60
   stories_max: 4
+  narracao_palavras: 30 # por slide; cerca de 12 segundos de fala
 
 imagem:
   feed: [1080, 1350]

@@ -11,9 +11,10 @@ Para cada post aprovado:
 1. **Cabeçalho:** perfil, dia, formato, tema e horário sugerido.
 2. **Imagens:** enviadas como arquivo, para o Telegram não comprimir, em 1080×1350 e na ordem certa.
 3. **Vídeo para Reels:** só em carrossel, na vertical, com os slides e sem áudio. Escolha uma música da biblioteca do Instagram ao postar.
-4. **Legenda:** mensagem só com a legenda e as hashtags. Toque e segure, copie e cole.
-5. **Apoio:** alt text de cada imagem e a enquete sugerida, quando houver.
-6. **Stories:** a partir da semana 3 da rampa, as imagens e os textos dos stories.
+4. **Roteiro de narração:** só em carrossel, uma fala por slide com o tempo de cada trecho, por exemplo `0:00–0:05 · Slide 1: ...`. Grave com a sua voz por cima do vídeo, na ferramenta de voz do Instagram ou no CapCut. Cada slide fica na tela o tempo da fala.
+5. **Legenda:** mensagem só com a legenda e as hashtags. Toque e segure, copie e cole.
+6. **Apoio:** alt text de cada imagem e a enquete sugerida, quando houver.
+7. **Stories:** a partir da semana 3 da rampa, as imagens e os textos dos stories.
 
 ## 1. Criar o bot
 

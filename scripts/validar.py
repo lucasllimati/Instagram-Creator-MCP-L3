@@ -92,6 +92,7 @@ def _campos_texto(post: dict) -> list[tuple[str, str]]:
                 campos.append((local, s[chave]))
         campos.extend((local, item) for item in s.get("itens", []))
     campos.extend((f"story {i}", st["texto"]) for i, st in enumerate(post.get("stories", []), 1))
+    campos.extend((f"narração do slide {i}", fala) for i, fala in enumerate(post.get("narracao", []), 1))
     if post.get("legenda"):
         campos.append(("legenda", post["legenda"]))
     return campos
@@ -146,6 +147,20 @@ def _texto(post, ctx) -> list[Erro]:
         ultimo = slides[-1]
         if ultimo["tipo"] != "cta" or not ultimo.get("cta"):
             erros.append(Erro("texto.cta", f"slide {ultimo['n']}", "o último slide precisa ser do tipo cta e ter CTA"))
+    return erros
+
+
+def _narracao(post, ctx) -> list[Erro]:
+    falas = post.get("narracao")
+    if not falas:
+        return []
+    erros = []
+    if len(falas) != len(post["slides"]):
+        erros.append(Erro("narracao.quantidade", "narracao", f"{len(falas)} falas; precisa de uma por slide ({len(post['slides'])})"))
+    limite = ctx.limites["conteudo"]["narracao_palavras"]
+    for i, fala in enumerate(falas, 1):
+        if _palavras(fala) > limite:
+            erros.append(Erro("narracao.tamanho", f"narração do slide {i}", f"{_palavras(fala)} palavras; máximo {limite}"))
     return erros
 
 
@@ -305,7 +320,7 @@ def validar_post(post: dict, ctx: Contexto) -> list[Erro]:
 
     completo = post["status"] not in STATUS_SEM_LEGENDA
     campos = _campos_texto(post)
-    erros = _estrutura(post, ctx) + _texto(post, ctx)
+    erros = _estrutura(post, ctx) + _texto(post, ctx) + _narracao(post, ctx)
     erros += _buscar_termos(ctx.termos["promessas"], campos, "promessa")
     erros += _livros(post, ctx, campos) + _repeticao(post, ctx) + _atualidade(post, campos) + _dados(post, ctx)
     erros += _fin(post, ctx, campos, completo) if post["perfil"] == "FIN" else _mkt(post, campos)
@@ -321,7 +336,9 @@ def exige_imagens(post: dict) -> bool:
 
 def _publicado(caminho: Path) -> bool:
     estado = comum.ler_json(caminho.parent / "estado.json", {})
-    return estado.get("estado") in {"publicado", "adiado", "vencido", "atrasado"}
+    encerrados = {"publicado", "enviado", "adiado", "vencido", "atrasado"}
+    # O publicador grava em "estado"; a entrega pelo Telegram, em "telegram.estado".
+    return estado.get("estado") in encerrados or estado.get("telegram", {}).get("estado") in encerrados
 
 
 def main(argv=None) -> int:

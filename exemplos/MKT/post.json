@@ -8,17 +8,59 @@
   "tema_slug": "bio-que-converte",
   "status": "pronto",
   "slides": [
-    { "n": 1, "tipo": "capa", "titulo": "Sua bio passa no teste dos 3 segundos?", "texto": "Confira em 5 itens" },
-    { "n": 2, "tipo": "conteudo", "titulo": "Diz o que você faz", "texto": "Troque \"apaixonada por doces\" por algo concreto.", "itens": ["Bolos sob encomenda para festas na Zona Sul"] },
-    { "n": 3, "tipo": "conteudo", "titulo": "Fala com quem compra", "texto": "Uma clínica pode dizer para quem atende e qual problema resolve. Quem chega precisa se reconhecer na primeira linha." },
-    { "n": 4, "tipo": "conteudo", "titulo": "Confira o restante", "itens": ["Uma chamada clara: peça pelo WhatsApp", "Um único link principal", "Cidade ou região, se atende no local"] },
-    { "n": 5, "tipo": "cta", "titulo": "Resumo", "texto": "Boa bio responde: o que você faz, para quem e qual o próximo passo.", "cta": "Salve e revise a sua hoje" }
+    {
+      "n": 1,
+      "tipo": "capa",
+      "titulo": "Sua bio passa no teste dos 3 segundos?",
+      "texto": "Confira em 5 itens"
+    },
+    {
+      "n": 2,
+      "tipo": "conteudo",
+      "titulo": "Diz o que você faz",
+      "texto": "Troque \"apaixonada por doces\" por algo concreto.",
+      "itens": [
+        "Bolos sob encomenda para festas na Zona Sul"
+      ]
+    },
+    {
+      "n": 3,
+      "tipo": "conteudo",
+      "titulo": "Fala com quem compra",
+      "texto": "Uma clínica pode dizer para quem atende e qual problema resolve. Quem chega precisa se reconhecer na primeira linha."
+    },
+    {
+      "n": 4,
+      "tipo": "conteudo",
+      "titulo": "Confira o restante",
+      "itens": [
+        "Uma chamada clara: peça pelo WhatsApp",
+        "Um único link principal",
+        "Cidade ou região, se atende no local"
+      ]
+    },
+    {
+      "n": 5,
+      "tipo": "cta",
+      "titulo": "Resumo",
+      "texto": "Boa bio responde: o que você faz, para quem e qual o próximo passo.",
+      "cta": "Salve e revise a sua hoje"
+    }
   ],
   "stories": [
-    { "tipo": "chamada", "texto": "Sua bio explica o que você faz em 3 segundos?" }
+    {
+      "tipo": "chamada",
+      "texto": "Sua bio explica o que você faz em 3 segundos?"
+    }
   ],
   "legenda": "Bio do Instagram: 5 itens para quem visita entender e chamar você.\n\nQuem chega ao seu perfil decide rápido. Dá para ajustar tudo hoje à tarde, sem agência.\n\nComece trocando a frase bonita por uma frase concreta.\n\nSalve este checklist e comente BIO se quiser um exemplo para o seu nicho.",
-  "hashtags": ["#marketingdigital", "#pequenosnegocios", "#biodoinstagram", "#empreendedorismo", "#l3mktdigital"],
+  "hashtags": [
+    "#marketingdigital",
+    "#pequenosnegocios",
+    "#biodoinstagram",
+    "#empreendedorismo",
+    "#l3mktdigital"
+  ],
   "alt_text": [
     "Capa com o texto: sua bio passa no teste dos 3 segundos?",
     "Texto sobre dizer o que você faz, com exemplo de confeitaria.",
@@ -27,5 +69,12 @@
     "Resumo com o convite para salvar e revisar a bio.",
     "Story perguntando se a bio explica o que você faz em 3 segundos."
   ],
-  "fontes": []
+  "fontes": [],
+  "narracao": [
+    "Alguém abriu seu perfil agora. Em três segundos, essa pessoa entende o que você vende?",
+    "Primeiro: diga o que você faz de forma concreta. Bolo sob encomenda na Zona Sul vende mais que apaixonada por doces.",
+    "Depois, fale com quem compra. Quem chega precisa se reconhecer logo na primeira linha.",
+    "E feche com uma chamada clara, um único link e a sua região, se você atende no local.",
+    "Boa bio responde: o que você faz, para quem e qual o próximo passo. Salva e revisa a sua hoje."
+  ]
 }

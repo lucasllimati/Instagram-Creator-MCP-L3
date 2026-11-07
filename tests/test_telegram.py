@@ -102,6 +102,19 @@ def test_envia_cabecalho_album_video_legenda_e_apoio_em_ordem(raiz, post):
 
 
 @responses.activate
+def test_roteiro_de_narracao_vem_depois_do_video_com_tempos(raiz, post):
+    ok_telegram()
+    post["narracao"] = ["Primeira fala da capa."] + [f"Fala do slide {i}." for i in range(2, 7)]
+    instalar(raiz, post)
+    assert novo(raiz).executar() == 0
+    assert metodos() == ["sendMessage", "sendMediaGroup", "sendVideo", "sendMessage", "sendMessage", "sendMessage"]
+    roteiro = textos()[1]
+    assert "0:00" in roteiro
+    assert "Slide 1: Primeira fala da capa." in roteiro
+    assert textos()[2] == publicar.legenda_final(post)
+
+
+@responses.activate
 def test_album_vai_como_documento_para_nao_comprimir(raiz, post):
     ok_telegram()
     instalar(raiz, post)

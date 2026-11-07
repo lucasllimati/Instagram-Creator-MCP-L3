@@ -12,6 +12,35 @@ def test_imagens_so_sao_checadas_em_posts_renderizados(post):
     assert not validar.exige_imagens({**post, "status": "revisar_humano"})
 
 
+def test_narracao_valida_passa(post, ctx):
+    post["narracao"] = [f"Fala curta do slide {i}." for i in range(1, 7)]
+    assert validar.validar_post(post, ctx) == []
+
+
+def test_narracao_deve_ter_uma_fala_por_slide(post, ctx):
+    post["narracao"] = ["Só uma fala."]
+    assert "narracao.quantidade" in regras(post, ctx)
+
+
+def test_fala_longa_demais_reprova(post, ctx):
+    post["narracao"] = ["Fala."] * 6
+    post["narracao"][2] = " ".join(["palavra"] * 31)
+    assert "narracao.tamanho" in regras(post, ctx)
+
+
+def test_narracao_passa_pelas_mesmas_regras_de_texto(post, ctx):
+    post["narracao"] = ["Fala."] * 6
+    post["narracao"][1] = "Com isso você vai ficar rico."
+    assert "promessa" in regras(post, ctx)
+
+
+def test_todos_ignora_post_ja_entregue_pelo_telegram(tmp_path):
+    pasta = tmp_path / "fila" / "2026-11-07" / "FIN"
+    pasta.mkdir(parents=True)
+    (pasta / "estado.json").write_text('{"telegram": {"estado": "enviado"}}', encoding="utf-8")
+    assert validar._publicado(pasta / "post.json")
+
+
 def regras(post, ctx):
     return {e.regra for e in validar.validar_post(post, ctx)}
 

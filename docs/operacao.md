@@ -11,6 +11,17 @@
 | Diário, 08:30 e 12:30 | Actions | Publica FIN e MKT, ou entrega no Telegram |
 | Diário, 18:00 | Actions | FIN: só post de evento |
 
+## Post sob demanda (`/hoje`)
+
+Para rodar o fluxo completo agora, no Claude Code:
+
+1. `/hoje` faz os dois perfis; `/hoje FIN` ou `/hoje MKT`, só um.
+2. O Claude busca notícias, escolhe o tema, escreve, revisa, gera as imagens e abre o PR.
+3. Você confere a prévia e faz o merge.
+4. O workflow "Entregar no Telegram" roda no merge e entrega, em poucos minutos, todo post com a data de hoje.
+
+Posts de outros dias, como os da `/semana`, continuam esperando o horário agendado.
+
 ## Modo de entrega
 
 Ative um modo por vez, para o mesmo post não sair duas vezes.

@@ -19,6 +19,7 @@ Sistema que produz conteúdo educativo em português do Brasil para dois perfis:
 | Skill | Função |
 |---|---|
 | `/semana [AAAA-WW]` | Gera ou retoma a semana e abre o PR |
+| `/hoje [FIN\|MKT] [data]` | Fluxo completo do dia sob demanda; o merge entrega no Telegram na hora |
 | `/evento copom` | Post de decisão do Copom, com gráfico |
 | `/noticia <id>` | Post urgente a partir de um item do radar |
 | `/post <id>` | Refaz um único post |

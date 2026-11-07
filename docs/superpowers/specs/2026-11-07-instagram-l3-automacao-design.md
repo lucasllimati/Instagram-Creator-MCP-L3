@@ -67,7 +67,7 @@ Ficam em `.claude/agents/`. Cada um recebe só os caminhos de que precisa e devo
 
 | Agente | Modelo | Ferramentas | Saída |
 |---|---|---|---|
-| `analista` | Haiku | Read, Bash (script de insights), Write | `relatorios/semana-AAAA-WW.md` e sugestões |
+| `analista` | Haiku | Read, Write (lê `relatorios/dados/`, coletados pelo `insights.yml`) | `relatorios/semana-AAAA-WW.md` e sugestões |
 | `pesquisador` | Sonnet | WebSearch, WebFetch, Write | `pesquisa/semana-AAAA-WW.md` (até 15 ideias por perfil, com fonte) |
 | `pauteiro` | Sonnet | Read, Bash (`pautar.py`), Write | `calendario/semana-AAAA-WW.csv` |
 | `roteirista` | Sonnet | Read, Write | `post.json` de cada post do perfil na semana |
@@ -90,7 +90,7 @@ Ficam em `scripts/`, com lógica em módulos testáveis e sem depender de IA.
 | `folha_contato.py` | Monta uma folha de miniaturas por post para o QA visual |
 | `publicar.py` | Publica um perfil por execução; aceita `--dry-run` |
 | `renovar_token.py` | Renova os tokens e atualiza o GitHub Secrets |
-| `coletar_insights.py` | Busca os insights da semana e grava em `relatorios/dados/` |
+| `coletar_insights.py` | Roda no `insights.yml` (domingo às 06:00 BRT, antes da geração), busca os insights da semana com os tokens do Actions e grava em `relatorios/dados/` |
 
 ### Estrutura do repositório
 
@@ -296,7 +296,7 @@ Se o plano do GitHub não permitir proteção de branch em repositório privado,
 Guiadas por `docs/setup-meta.md`:
 
 1. Confirmar que as duas contas são profissionais.
-2. Criar o app na Meta e adicionar as duas contas, com `instagram_business_basic` e `instagram_business_content_publish`.
+2. Criar o app na Meta e adicionar as duas contas, com `instagram_business_basic`, `instagram_business_content_publish` e `instagram_business_manage_insights` (o nome desta última será conferido na documentação durante o setup).
 3. Gerar os tokens e cadastrar os segredos no GitHub.
 4. Criar o repositório público `l3-media` e os tokens restritos do GitHub.
 5. Trocar as bios.

@@ -48,6 +48,13 @@ def test_post_unico_nao_mostra_numeracao(post):
     assert "1/1" not in renderizar.html_slide(post, post["slides"][0], comum.marca("FIN"), comum.RAIZ / "dados")
 
 
+@pytest.mark.parametrize("tipo", ["capa", "conteudo", "cta", "frase"])
+def test_todo_template_mostra_os_itens_do_slide(post, tipo):
+    # Item escrito e revisado não pode sumir da imagem por falta de suporte no template.
+    slide = {"n": 6, "tipo": tipo, "titulo": "O que observar", "itens": ["Item que precisa aparecer"], "cta": "Salve"}
+    assert "Item que precisa aparecer" in renderizar.html_slide(post, slide, comum.marca("FIN"), comum.RAIZ / "dados")
+
+
 def test_html_escapa_texto(post):
     post["slides"][1]["texto"] = "<script>alert(1)</script>"
     assert "<script>alert" not in renderizar.html_slide(post, post["slides"][1], comum.marca("FIN"), comum.RAIZ / "dados")

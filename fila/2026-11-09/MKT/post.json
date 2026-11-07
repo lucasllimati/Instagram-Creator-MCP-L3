@@ -1,0 +1,95 @@
+{
+  "id": "MKT-2026-11-09",
+  "perfil": "MKT",
+  "data": "2026-11-09",
+  "pilar": "conceito",
+  "formato": "carrossel",
+  "titulo": "Funil de vendas na padaria de bairro",
+  "tema_slug": "funil-de-vendas",
+  "status": "pronto",
+  "slides": [
+    {
+      "n": 1,
+      "tipo": "capa",
+      "titulo": "Como a padaria faz o cliente comprar e voltar?",
+      "texto": "O funil de vendas explicado com uma padaria"
+    },
+    {
+      "n": 2,
+      "tipo": "conteudo",
+      "titulo": "1. Descobrir",
+      "texto": "Funil é o caminho do cliente até comprar. Na primeira etapa, ele só conhece você. Hoje: poste a foto real do pão saindo do forno, com o nome do bairro."
+    },
+    {
+      "n": 3,
+      "tipo": "conteudo",
+      "titulo": "2. Considerar",
+      "texto": "Agora ele compara com outras padarias. Hoje: deixe horário, endereço e cardápio fáceis de achar no perfil e diga como pedir."
+    },
+    {
+      "n": 4,
+      "tipo": "conteudo",
+      "titulo": "3. Comprar",
+      "texto": "Pedir tem que ser simples. Hoje: salve uma resposta pronta no WhatsApp Business (recurso de 2026, que pode mudar) com os pedidos mais comuns."
+    },
+    {
+      "n": 5,
+      "tipo": "conteudo",
+      "titulo": "4. Voltar",
+      "texto": "Quem gostou volta e indica. Hoje: pergunte se pode avisar pelo WhatsApp quando sair a fornada de bolo."
+    },
+    {
+      "n": 6,
+      "tipo": "conteudo",
+      "titulo": "A padaria do começo ao fim",
+      "itens": [
+        "Descobre: vê a foto do pão quente",
+        "Considera: confere horário e cardápio",
+        "Compra: pede pelo WhatsApp",
+        "Volta: recebe aviso da fornada"
+      ]
+    },
+    {
+      "n": 7,
+      "tipo": "cta",
+      "titulo": "Resumo",
+      "texto": "Funil é ajudar o cliente a descobrir, considerar, comprar e voltar, uma etapa por vez.",
+      "cta": "Salve e escolha uma etapa para ajustar hoje"
+    }
+  ],
+  "stories": [
+    {
+      "tipo": "chamada",
+      "texto": "Como a padaria faz o cliente comprar e voltar? Veja no feed."
+    }
+  ],
+  "enquete_manual": "Em qual etapa o seu negócio mais perde cliente? Descobrir, considerar, comprar ou voltar.",
+  "fontes": [],
+  "narracao": [
+    "Como uma padaria de bairro faz o cliente descobrir, comprar e voltar? Vou mostrar o caminho completo, sem gastar com anúncio.",
+    "Primeiro, ele precisa descobrir você. Uma foto real do pão saindo do forno, com o nome do bairro, já faz a padaria aparecer para quem mora perto.",
+    "Depois ele compara. Se horário, endereço e cardápio estão fáceis de achar, a padaria sai na frente sem gastar nada com anúncio.",
+    "Na hora de comprar, facilite. Uma resposta pronta no WhatsApp Business com os pedidos mais comuns evita demora e cliente desistindo.",
+    "E depois da compra, volte a falar com ele. Pedir licença para avisar da fornada de bolo é um jeito simples de trazer o cliente de volta.",
+    "Juntando tudo: a pessoa vê o pão quente, confere o cardápio, pede pelo WhatsApp e recebe o aviso da próxima fornada. Isso é um funil.",
+    "Funil é ajudar o cliente a descobrir, considerar, comprar e voltar. Salve e escolha uma etapa para ajustar hoje."
+  ],
+  "legenda": "Funil de vendas na padaria: como o cliente descobre, compra e volta?\n\nFunil é o caminho que o cliente percorre até comprar e voltar. Cada etapa pode ser ajustada sozinha.\nNão precisa de agência nem de verba de anúncio para começar.\nDá para testar hoje: uma foto real do pão, horário visível no perfil e uma resposta pronta no WhatsApp.\nOlhe em qual etapa você mais perde cliente e mexa só nela.\n\nQual etapa você vai ajustar primeiro? Responda nos comentários.",
+  "hashtags": [
+    "#marketingdigital",
+    "#marketingparapequenosnegocios",
+    "#funildevendas",
+    "#atendimentoaocliente",
+    "#l3mktdigital"
+  ],
+  "alt_text": [
+    "Capa com o título 'Como a padaria faz o cliente comprar e voltar?' e a frase 'O funil de vendas explicado com uma padaria'.",
+    "Slide '1. Descobrir'. Funil é o caminho do cliente até comprar. A dica: postar a foto real do pão saindo do forno, com o nome do bairro.",
+    "Slide '2. Considerar'. O cliente compara com outras padarias. A dica: deixar horário, endereço e cardápio fáceis de achar no perfil.",
+    "Slide '3. Comprar'. Pedir tem que ser simples. A dica: salvar uma resposta pronta no WhatsApp Business com os pedidos mais comuns.",
+    "Slide '4. Voltar'. Quem gostou volta e indica. A dica: perguntar se pode avisar pelo WhatsApp quando sair a fornada de bolo.",
+    "Slide 'A padaria do começo ao fim' com quatro etapas em lista: descobre, considera, compra e volta.",
+    "Resumo: funil é ajudar o cliente a descobrir, considerar, comprar e voltar, uma etapa por vez. Chamada para salvar e escolher uma etapa para ajustar hoje.",
+    "Story com a chamada 'Como a padaria faz o cliente comprar e voltar? Veja no feed'."
+  ]
+}

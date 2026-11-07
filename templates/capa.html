@@ -9,5 +9,6 @@
 <span class="etiqueta">{{ rotulo_pilar }}</span>
 <h1 class="gancho">{{ slide.titulo }}</h1>
 {% if slide.texto %}<p class="subtitulo">{{ slide.texto }}</p>{% endif %}
+{% include "_lista.html" %}
 <p class="arraste">Arraste para o lado &rarr;</p>
 {% endblock %}

@@ -89,7 +89,9 @@ def svg_serie(pontos: list[dict], cores: dict, degrau: bool, largura: int = 920,
     inicio_ano = dt.date.fromordinal(x0).year
     fim_ano = dt.date.fromordinal(x1).year
     passo = max(1, (fim_ano - inicio_ano + 1) // 5)
-    for ano in range(inicio_ano + 1, fim_ano + 1, passo):
+    # Inclui o ano inicial quando a série começa exatamente em 1º de janeiro.
+    primeiro = inicio_ano if dt.date(inicio_ano, 1, 1).toordinal() >= x0 else inicio_ano + 1
+    for ano in range(primeiro, fim_ano + 1, passo):
         px = x(f"{ano}-01-01")
         partes.append(f'<line x1="{px}" x2="{px}" y1="{altura - base}" y2="{altura - base + 12}" stroke="{escape(cores["texto"])}" stroke-width="2"/>')
         partes.append(f'<text x="{px}" y="{altura - 12}" text-anchor="middle" font-size="30">{ano}</text>')

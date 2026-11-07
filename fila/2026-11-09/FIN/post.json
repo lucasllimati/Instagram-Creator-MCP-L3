@@ -1,0 +1,119 @@
+{
+  "id": "FIN-2026-11-09",
+  "perfil": "FIN",
+  "data": "2026-11-09",
+  "pilar": "conceito",
+  "formato": "carrossel",
+  "titulo": "Inflação e poder de compra",
+  "tema_slug": "inflacao-poder-de-compra",
+  "status": "pronto",
+  "hipotetico": true,
+  "enquete_manual": "Você já sentiu o mercado ficar mais caro no último ano? Sim / Nem tanto",
+  "slides": [
+    {
+      "n": 1,
+      "tipo": "capa",
+      "titulo": "Por que o mesmo dinheiro compra menos?",
+      "texto": "Inflação e IPCA explicados em 7 slides"
+    },
+    {
+      "n": 2,
+      "tipo": "conteudo",
+      "titulo": "O que é inflação",
+      "texto": "Inflação é o aumento geral dos preços ao longo do tempo. Quando os preços sobem e o seu dinheiro continua igual, ele compra menos. Isso é perda de poder de compra."
+    },
+    {
+      "n": 3,
+      "tipo": "conteudo",
+      "titulo": "Um exemplo com números",
+      "texto": "Supondo que suas compras do mês custem R$ 1.000. Se os preços subirem 5% em um ano, as mesmas compras passam a custar R$ 1.050. Com R$ 1.000, você não leva tudo."
+    },
+    {
+      "n": 4,
+      "tipo": "conteudo",
+      "titulo": "Como se mede: o IPCA",
+      "texto": "O IPCA é o índice oficial de inflação do Brasil. Ele acompanha, mês a mês, a variação média dos preços de produtos e serviços que as famílias consomem."
+    },
+    {
+      "n": 5,
+      "tipo": "grafico",
+      "titulo": "IPCA mensal desde 2025",
+      "serie": 433
+    },
+    {
+      "n": 6,
+      "tipo": "conteudo",
+      "titulo": "Como ler o gráfico",
+      "texto": "Em setembro de 2026, o IPCA do mês foi 0,82%. Em agosto, foi -0,32%: os preços médios caíram. O índice varia de mês para mês, então vale olhar o conjunto."
+    },
+    {
+      "n": 7,
+      "tipo": "cta",
+      "titulo": "O que observar",
+      "itens": [
+        "Quanto seus gastos fixos subiram no último ano",
+        "Se seu salário ou renda acompanhou o IPCA",
+        "Se o rendimento do seu dinheiro cobre a inflação"
+      ],
+      "cta": "Salve para consultar depois"
+    }
+  ],
+  "stories": [
+    {
+      "tipo": "chamada",
+      "texto": "Seu dinheiro compra menos que antes? Veja por que no post de hoje"
+    }
+  ],
+  "fontes": [
+    {
+      "descricao": "IPCA mensal, série SGS 433",
+      "url": "https://api.bcb.gov.br/dados/serie/bcdata.sgs.433/dados?formato=json",
+      "data": "2026-11-07",
+      "veiculo": "Banco Central",
+      "primaria": true
+    }
+  ],
+  "dados_ref": {
+    "serie": 433,
+    "inicio": "2025-01-01",
+    "fim": "2026-09-01",
+    "coletado_em": "2026-11-07",
+    "valores_declarados": [
+      {
+        "data": "2026-09-01",
+        "valor": 0.82
+      },
+      {
+        "data": "2026-08-01",
+        "valor": -0.32
+      }
+    ]
+  },
+  "narracao": [
+    "Você ganha o mesmo todo mês, mas o mercado parece mais caro. Isso tem nome, e eu explico agora.",
+    "Pensa no seu mercado: a cesta é a mesma, mas a conta no caixa vem maior. Isso é inflação, e o efeito dela é o dinheiro perder força de compra.",
+    "Supondo que suas compras custem mil reais e os preços subam cinco por cento. Agora elas custam mil e cinquenta. Os mesmos mil reais já não bastam.",
+    "Alguém precisa medir essa alta. No Brasil, é o IPCA: o IBGE confere o preço de uma cesta do que as famílias compram e mostra quanto variou no mês.",
+    "Olha o IPCA de cada mês desde 2025. Ele sobe e desce, não é uma linha reta.",
+    "Esses percentuais são de um mês só. Os meses se acumulam, e é assim que se chega à inflação do ano.",
+    "Resumindo: observe seus gastos, sua renda e o que seu dinheiro rende frente ao IPCA. Salva este vídeo para consultar depois."
+  ],
+  "legenda": "Inflação: por que o mesmo dinheiro compra menos?\n\nSe o salário ficou igual e o mercado ficou mais caro, você sentiu a perda de poder de compra.\nSupondo compras de R$ 1.000 por mês e alta de 5% em um ano, a mesma cesta passa a custar R$ 1.050.\nO IPCA é o índice oficial que mede essa variação no Brasil, mês a mês.\nFonte dos dados do IPCA: Banco Central, série SGS 433, coletados em 07/11/2026.\nPara o seu bolso, o que importa é comparar sua renda com a inflação do período.\n\nSalve este post e confira quanto seus gastos fixos subiram no último ano.\n\nConteúdo educativo, não é recomendação de investimento.",
+  "hashtags": [
+    "#educacaofinanceira",
+    "#inflacao",
+    "#ipca",
+    "#poderdecompra",
+    "#l3investir"
+  ],
+  "alt_text": [
+    "Capa com o título 'Por que o mesmo dinheiro compra menos?' e a frase 'Inflação e IPCA explicados em 7 slides'.",
+    "Slide 'O que é inflação'. Inflação é o aumento geral dos preços ao longo do tempo. Com o mesmo dinheiro, compra-se menos: isso é perda de poder de compra.",
+    "Slide 'Um exemplo com números'. Supondo compras de R$ 1.000 no mês, uma alta de 5% em um ano faz as mesmas compras passarem a custar R$ 1.050.",
+    "Slide 'Como se mede: o IPCA'. O IPCA é o índice oficial de inflação do Brasil e acompanha, mês a mês, a variação média dos preços que as famílias consomem.",
+    "Gráfico da variação mensal do IPCA desde janeiro de 2025. O último valor, de setembro de 2026, é 0,82%, depois de -0,32% em agosto.",
+    "Slide 'Como ler o gráfico'. Em setembro de 2026, o IPCA do mês foi 0,82%. Em agosto, foi -0,32%, com queda dos preços médios. A variação muda de mês para mês, então vale olhar o conjunto.",
+    "Checklist com três itens para observar: quanto os gastos fixos subiram no último ano; se a renda acompanhou o IPCA; se o rendimento do dinheiro cobre a inflação. Chamada para salvar o post.",
+    "Story com a chamada 'Seu dinheiro compra menos que antes? Veja por que no post de hoje'."
+  ]
+}

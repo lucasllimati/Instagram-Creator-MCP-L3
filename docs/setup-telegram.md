@@ -4,6 +4,11 @@ Use este caminho enquanto a publicação automática não estiver disponível, p
 
 Não precisa de conta na Meta. Calcule 10 minutos.
 
+## Quando chega
+
+- **No horário de cada perfil:** FIN às 08:30, MKT às 12:30 e eventos de FIN às 18:00, para os posts aprovados com antecedência.
+- **No merge:** um post com a data de hoje, como os criados com `/hoje`, chega em poucos minutos depois da aprovação.
+
 ## O que chega no canal
 
 Para cada post aprovado:

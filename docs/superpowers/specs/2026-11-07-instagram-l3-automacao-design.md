@@ -324,6 +324,7 @@ Adicionado em 2026-11-07, porque a conta de Lucas na Meta está bloqueada e com 
 - Post entregue entra em `historico/publicacoes.csv` com `status=entregue` e conta como tema usado.
 - Ativado por `ENTREGA_TELEGRAM=true`. Use um modo por vez: publicação automática ou Telegram.
 - Sem a API, os insights automáticos param.
+- **Comando `/hoje` (adicionado em 2026-11-07):** fluxo completo de um dia sob demanda. `scripts/hoje.py` monta o plano sem IA (pilar, rampa, evento, temas usados e radar). O workflow `telegram.yml` também roda no merge em `main` que altera `fila/**`, com um job por perfil e concorrência por perfil, e entrega na hora o que tiver a data de hoje.
 
 ## 13. Atualidades, dados e eventos
 

@@ -5,6 +5,11 @@ on:
     - cron: "30 11 * * *" # 08:30 BRT: FIN
     - cron: "30 15 * * *" # 12:30 BRT: MKT
     - cron: "0 21 * * *" # 18:00 BRT: FIN, só posts de evento
+  # Merge de post em main: entrega na hora o que tiver a data de hoje (/hoje).
+  # Posts de outros dias continuam esperando o horário agendado.
+  push:
+    branches: [main]
+    paths: ["fila/**"]
   workflow_dispatch:
     inputs:
       perfil:
@@ -30,14 +35,19 @@ permissions:
   contents: write
   issues: write
 
-concurrency:
-  group: telegram-${{ inputs.perfil || (github.event.schedule == '30 15 * * *' && 'MKT' || 'FIN') }}
-  cancel-in-progress: false
-
 jobs:
   entregar:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      max-parallel: 1 # um perfil por vez evita conflito no commit de estado
+      matrix:
+        perfil: ${{ fromJSON(github.event_name == 'push' && '["FIN","MKT"]' || format('["{0}"]', inputs.perfil || (github.event.schedule == '30 15 * * *' && 'MKT' || 'FIN'))) }}
+    # Por perfil: um merge e um horário agendado nunca enviam o mesmo post em paralelo.
+    concurrency:
+      group: telegram-${{ matrix.perfil }}
+      cancel-in-progress: false
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -53,7 +63,7 @@ jobs:
           git config user.email "l3-telegram@users.noreply.github.com"
       - name: Entregar
         env:
-          PERFIL: ${{ inputs.perfil || (github.event.schedule == '30 15 * * *' && 'MKT' || 'FIN') }}
+          PERFIL: ${{ matrix.perfil }}
           JANELA: ${{ inputs.janela || (github.event.schedule == '0 21 * * *' && 'evento' || 'normal') }}
           DATA: ${{ inputs.data }}
           SIMULAR: ${{ inputs.dry_run }}

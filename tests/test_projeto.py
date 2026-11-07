@@ -19,7 +19,7 @@ AGENTES = {
     "legendista": ({"Read", "Edit"}, "haiku"),
     "qa-visual": ({"Read"}, "sonnet"),
 }
-SKILLS = ["semana", "validar", "status", "post", "evento", "noticia"]
+SKILLS = ["semana", "validar", "status", "post", "evento", "noticia", "hoje"]
 WORKFLOWS = ["ci", "publicar", "renovar-token", "insights", "radar", "telegram"]
 
 
@@ -149,6 +149,17 @@ def test_telegram_usa_os_mesmos_horarios_da_publicacao():
         return {c["cron"] for c in dados[True]["schedule"]}
 
     assert crons("telegram") == crons("publicar")
+
+
+def test_merge_de_post_em_main_dispara_a_entrega_dos_dois_perfis():
+    dados = yaml.safe_load((RAIZ / ".github" / "workflows" / "telegram.yml").read_text(encoding="utf-8"))
+    assert dados[True]["push"] == {"branches": ["main"], "paths": ["fila/**"]}
+    job = dados["jobs"]["entregar"]
+    assert "matrix" in job["strategy"]
+    assert "'[\"FIN\",\"MKT\"]'" in job["strategy"]["matrix"]["perfil"]
+    # Concorrência por perfil no job, para push e horário agendado não enviarem o mesmo post em paralelo.
+    assert job["concurrency"]["group"] == "telegram-${{ matrix.perfil }}"
+    assert job["concurrency"]["cancel-in-progress"] is False
 
 
 def test_publicar_tem_concorrencia_por_perfil():

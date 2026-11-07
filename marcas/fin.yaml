@@ -1,0 +1,20 @@
+codigo: FIN
+arroba: "@l3investir"
+hashtag_marca: "#l3investir"
+promessa: "Finanças sem economês: um conceito por dia para aplicar hoje."
+voz: Professor paciente e prático; exemplos com números redondos em reais.
+persona: 22 a 40 anos, CLT ou autônomo, organizando o dinheiro e curioso sobre investir.
+aviso_legal: "Conteúdo educativo, não é recomendação de investimento."
+motivo: curva
+cores:
+  principal: "#0F3D2E"
+  fundo: "#F7F5F0"
+  apoio: "#3BB273"
+  destaque: "#E0B54A"
+  # Texto e tons derivados de cada superfície
+  texto_sobre_principal: "#F7F5F0"
+  texto_sobre_fundo: "#0F3D2E"
+  corpo_sobre_fundo: "#23453A"
+  destaque_sobre_fundo: "#1F7A4D"
+  destaque_sobre_principal: "#E0B54A"
+  texto_sobre_destaque: "#0F3D2E"

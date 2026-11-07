@@ -1,0 +1,55 @@
+# Fontes do radar. Todas retornaram itens em 2026-11-07.
+# O feed do Neil Patel Brasil estava vazio nesse dia e ficou de fora.
+max_idade_dias: 14
+max_por_perfil: 20
+
+fontes:
+  - { nome: Agência Brasil, url: "https://agenciabrasil.ebc.com.br/rss/economia/feed.xml", perfis: [FIN, MKT] }
+  - { nome: Meta Newsroom, url: "https://about.fb.com/news/feed/", perfis: [MKT] }
+  - { nome: Google, url: "https://blog.google/rss/", perfis: [MKT] }
+  - { nome: Rock Content, url: "https://rockcontent.com/br/blog/feed/", perfis: [MKT] }
+
+palavras_chave:
+  FIN:
+    selic: 5
+    copom: 5
+    ipca: 5
+    inflação: 3
+    juros: 3
+    juro: 3
+    dólar: 2
+    cartão: 2
+    consignado: 2
+    imposto: 2
+    emprego: 1
+    banco central: 3
+    tesouro: 3
+    imposto de renda: 3
+    endividamento: 3
+    crédito: 2
+    dívida: 2
+    poupança: 2
+    pix: 2
+    salário mínimo: 2
+    orçamento: 1
+  MKT:
+    instagram: 5
+    reels: 4
+    algoritmo: 4
+    marketing: 3
+    whatsapp: 3
+    pequenos negócios: 4
+    pequena empresa: 4
+    empreendedor: 3
+    google ads: 3
+    google search: 3
+    seo: 3
+    anúncios: 3
+    redes sociais: 3
+    inteligência artificial: 1
+    tráfego: 2
+    e-commerce: 2
+
+series_sgs:
+  - { codigo: 432, nome: "Selic meta (% a.a.)", degrau: true, anos: 5 }
+  - { codigo: 433, nome: "IPCA mensal (%)", degrau: false, anos: 5 }

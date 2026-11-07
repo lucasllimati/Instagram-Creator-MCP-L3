@@ -1,0 +1,5 @@
+[tool.pytest.ini_options]
+addopts = "--basetemp=.pytest_tmp"
+testpaths = ["tests"]
+pythonpath = ["scripts"]
+markers = ["render: testes que abrem o Chromium"]

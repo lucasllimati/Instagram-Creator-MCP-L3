@@ -47,7 +47,8 @@ Conferido na documentação oficial da Meta em 2026-11-07.
 
 **Ainda não confirmado (testar na implementação):**
 - Quais tipos de conta podem publicar stories, pois a documentação lida não diz.
-- Se a API aceita alt text em imagens. Se aceitar, é enviado; se não, fica apenas registrado no `post.json`.
+
+**Confirmado depois, na documentação:** o `alt_text` é aceito em imagem única e em imagem de carrossel, mas não em stories.
 
 ## 4. Arquitetura
 
@@ -70,8 +71,8 @@ Ficam em `.claude/agents/`. Cada um recebe só os caminhos de que precisa e devo
 |---|---|---|---|
 | `analista` | Haiku | Read, Write (lê `relatorios/dados/`, coletados pelo `insights.yml`) | `relatorios/semana-AAAA-WW.md` e sugestões |
 | `pesquisador` | Sonnet | WebSearch, WebFetch, Write | `pesquisa/semana-AAAA-WW.md` (até 15 ideias por perfil, com fonte) |
-| `pauteiro` | Sonnet | Read, Bash (`pautar.py`), Write | `calendario/semana-AAAA-WW.csv` |
-| `roteirista` | Sonnet | Read, Write | `post.json` de cada post do perfil na semana |
+| `pauteiro` | Sonnet | Read, Edit, Bash (`pautar.py`) | `calendario/semana-AAAA-WW.csv` |
+| `roteirista` | Sonnet | Read, Write, Edit | `post.json` de cada post do perfil na semana |
 | `revisor` | Sonnet | Read, Grep, Glob (sem escrita) | Veredito em JSON, gravado pelo orquestrador |
 | `legendista` | Haiku | Read, Edit | Campos `legenda`, `hashtags` e `alt_text` |
 | `qa-visual` | Sonnet | Read | Veredito em JSON por post |
@@ -188,7 +189,7 @@ Reprovam sem usar IA e explicam o motivo com arquivo e slide. Os limites ficam e
 | Estrutura | Respeita o schema; formato compatível com o pilar; carrossel dentro da faixa do pilar e no máximo 10 itens |
 | Texto | Gancho até 10 palavras; título até 8; slide até 35; último slide com resumo e CTA |
 | Legenda | Até 2.200 caracteres; primeira linha até 125; contém CTA |
-| Hashtags | De 5 a 10; inclui `#l3investir` ou `#l3mktdigital`; sem termos da lista proibida; bloco diferente do post anterior |
+| Hashtags | Exatamente 5 (o prompt pede de 5 a 10, e há relato não confirmado de teto de 5 no Instagram; ajustável em `config/limites.yaml`); inclui `#l3investir` ou `#l3mktdigital`; sem termos da lista proibida; bloco diferente do post anterior |
 | Acessibilidade | Um alt text por imagem |
 | Promessas | Bloqueia "fique rico", "renda garantida", "10k seguidores" e variações |
 | FIN | Bloqueia tickers (padrão como `PETR4`) e nomes de corretoras e produtos da lista; exige o aviso legal em posts de investimento; termos como Selic, IPCA, IR e FGC, ou percentuais, exigem fonte com data ou a marca `hipotetico: true` |
@@ -333,11 +334,12 @@ Fontes testadas em 2026-11-07, retornando RSS válido a partir desta máquina:
 
 | Perfil | Fonte | Feed |
 |---|---|---|
-| FIN | Agência Brasil | `https://agenciabrasil.ebc.com.br/rss/ultimasnoticias/feed.xml` |
+| FIN e MKT | Agência Brasil, economia | `https://agenciabrasil.ebc.com.br/rss/economia/feed.xml` |
 | MKT | Meta Newsroom | `https://about.fb.com/news/feed/` |
 | MKT | Google | `https://blog.google/rss/` |
-| MKT | Neil Patel Brasil | `https://neilpatel.com/br/blog/feed/` |
 | MKT | Rock Content | `https://rockcontent.com/br/blog/feed/` |
+
+O feed geral da Agência Brasil traz só 10 itens de todos os assuntos, e o do Neil Patel Brasil veio vazio na coleta real, por isso ficaram de fora.
 
 A falha de uma fonte só gera aviso no radar. Sem feed confirmado: IBGE (403), RD Station e Google Search Central. A execução pelo GitHub Actions ainda precisa ser testada, pois os sites podem tratar esses IPs de outra forma.
 
@@ -375,7 +377,7 @@ A falha de uma fonte só gera aviso no radar. Sem feed confirmado: IBGE (403), R
 2. A Pauta **não agenda post fixo em FIN no dia seguinte ao Copom**. Essa vaga fica reservada ao evento.
 3. Depois da decisão, Lucas roda `/evento copom` ou a rotina agendada dispara. Uma alta ou corte aparece na série 432, mas uma manutenção não necessariamente, por isso o resultado precisa ser confirmado no comunicado oficial.
 4. O CI valida, e o PR indica o prazo de merge.
-5. Em dias de evento, FIN tem duas tentativas de publicação: 08:30 e 18:00 BRT. A das 18:00 só publica posts de evento.
+5. FIN tem duas tentativas de publicação por dia: 08:30 e 18:00 BRT. A das 18:00 só publica posts de evento e, sem nenhum, termina em seguida. Posts de evento ficam em `fila/AAAA-MM-DD/FIN-evento/`.
 6. Sem merge até 18:00, nada é publicado naquela vaga e o post vence. É o comportamento seguro, e nenhum evento vai ao ar sem aprovação.
 
 Uma notícia sem data prevista segue o mesmo fluxo por `/noticia <id-do-radar>`. Como ela não tem vaga reservada, o post de evento tem prioridade sobre o post fixo do dia, que passa a `adiado` e volta para a pauta. O teto de 1 post por dia continua valendo, e posts de evento contam na rampa.

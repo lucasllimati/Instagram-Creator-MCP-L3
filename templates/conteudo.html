@@ -1,0 +1,17 @@
+{% extends "_base.html" %}
+{% block css %}
+.area { justify-content: center; gap: calc(48px * var(--e)); }
+h2 { font-size: calc({{ tamanho_titulo }}px * var(--e)); color: var(--tx); }
+ul { list-style: none; display: flex; flex-direction: column; gap: calc(34px * var(--e)); }
+li { display: flex; gap: 26px; font-size: calc(50px * var(--e)); line-height: 1.26; color: var(--corpo); }
+li::before {
+  content: ""; flex: 0 0 28px; height: 28px; margin-top: calc(17px * var(--e));
+  background: var(--ac); border-radius: 50%;
+}
+{% endblock %}
+{% block conteudo %}
+<div class="traco"></div>
+<h2>{{ slide.titulo }}</h2>
+{% if slide.texto %}<p class="corpo">{{ slide.texto }}</p>{% endif %}
+{% if slide.itens %}<ul>{% for item in slide.itens %}<li><span>{{ item }}</span></li>{% endfor %}</ul>{% endif %}
+{% endblock %}

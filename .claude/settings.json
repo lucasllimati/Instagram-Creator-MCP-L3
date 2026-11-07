@@ -1,0 +1,35 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python scripts/validar.py:*)",
+      "Bash(python scripts/validar_imagem.py:*)",
+      "Bash(python scripts/pautar.py:*)",
+      "Bash(python scripts/renderizar.py:*)",
+      "Bash(python scripts/folha_contato.py:*)",
+      "Bash(python scripts/status.py:*)",
+      "Bash(python scripts/dados_economicos.py:*)",
+      "Bash(python scripts/radar.py:*)",
+      "Bash(python scripts/evento.py:*)",
+      "Bash(python -m pytest:*)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Bash(gh secret:*)",
+      "PowerShell(gh secret:*)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"$CLAUDE_PROJECT_DIR/.claude/hooks/validar_post.py\""
+          }
+        ]
+      }
+    ]
+  }
+}

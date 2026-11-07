@@ -1,0 +1,18 @@
+{% extends "_base.html" %}
+{% block css %}
+.area { justify-content: center; gap: calc(52px * var(--e)); }
+h2 { font-size: calc({{ tamanho_titulo }}px * var(--e)); }
+.resumo { font-size: calc(58px * var(--e)); line-height: 1.28; font-weight: 500; }
+.chamada {
+  align-self: flex-start;
+  font-size: calc(50px * var(--e)); font-weight: 800; line-height: 1.2;
+  color: var(--sobre-destaque); background: var(--destaque);
+  padding: 32px 46px; border-radius: 12px;
+}
+{% endblock %}
+{% block conteudo %}
+<div class="traco"></div>
+<h2>{{ slide.titulo }}</h2>
+{% if slide.texto %}<p class="resumo">{{ slide.texto }}</p>{% endif %}
+{% if slide.cta %}<p class="chamada">{{ slide.cta }}</p>{% endif %}
+{% endblock %}

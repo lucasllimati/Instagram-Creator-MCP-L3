@@ -1,0 +1,16 @@
+{% extends "_base.html" %}
+{% block css %}
+.area { justify-content: center; gap: calc(26px * var(--e)); }
+h2 { font-size: calc({{ tamanho_titulo }}px * var(--e)); }
+.apoio { font-size: calc(42px * var(--e)); line-height: 1.28; color: var(--corpo); }
+.fonte { font-size: 28px; line-height: 1.25; color: var(--corpo); }
+.grafico { flex: none; }
+.grafico svg { display: block; }
+{% endblock %}
+{% block motivo %}{% endblock %}
+{% block conteudo %}
+<h2>{{ slide.titulo }}</h2>
+{% if slide.texto %}<p class="apoio">{{ slide.texto }}</p>{% endif %}
+<div class="grafico">{{ svg | safe }}</div>
+<p class="fonte">Fonte: {{ fonte_dados }}, coletado em {{ data_coleta }}</p>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "_base.html" %}
+{% block css %}
+.area { justify-content: center; gap: calc(48px * var(--e)); }
+.frase { font-size: calc({{ tamanho_titulo }}px * var(--e)); }
+.apoio { font-size: calc(54px * var(--e)); line-height: 1.3; font-weight: 500; }
+{% endblock %}
+{% block conteudo %}
+<span class="etiqueta">{{ rotulo_pilar }}</span>
+<h1 class="frase">{{ slide.titulo }}</h1>
+{% if slide.texto %}<p class="apoio">{{ slide.texto }}</p>{% endif %}
+{% endblock %}

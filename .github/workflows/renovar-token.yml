@@ -1,0 +1,33 @@
+name: Renovar tokens
+
+on:
+  schedule:
+    - cron: "0 12 1 * *" # dia 1, 09:00 BRT
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  renovar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12"
+      - name: Instalar dependências
+        run: pip install -r requirements.txt
+      - name: Renovar
+        env:
+          SECRETS_PAT: ${{ secrets.SECRETS_PAT }}
+          IG_TOKEN_FIN: ${{ secrets.IG_TOKEN_FIN }}
+          IG_TOKEN_MKT: ${{ secrets.IG_TOKEN_MKT }}
+        run: python scripts/renovar_token.py
+      - name: Avisar falha
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh issue create --title "Falha ao renovar tokens do Instagram" --body "Veja a execução em Actions e docs/operacao.md. O token expira em 60 dias sem renovação."

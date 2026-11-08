@@ -2,11 +2,11 @@
   "serie": 432,
   "nome": "Selic meta (% a.a.)",
   "fonte": "Banco Central, SGS série 432",
-  "coletado_em": "2026-11-07",
+  "coletado_em": "2026-11-08",
   "degrau": true,
   "pontos": [
     {
-      "data": "2021-11-07",
+      "data": "2021-11-08",
       "valor": 7.75
     },
     {
@@ -110,7 +110,7 @@
       "valor": 13.75
     },
     {
-      "data": "2026-11-07",
+      "data": "2026-11-08",
       "valor": 13.75
     }
   ]

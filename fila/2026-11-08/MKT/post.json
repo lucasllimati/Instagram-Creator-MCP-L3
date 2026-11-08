@@ -1,0 +1,38 @@
+{
+  "id": "MKT-2026-11-08",
+  "perfil": "MKT",
+  "data": "2026-11-08",
+  "pilar": "reflexao",
+  "formato": "post_unico",
+  "titulo": "Consistência antes da perfeição",
+  "tema_slug": "consistencia-antes-da-perfeicao",
+  "status": "pronto",
+  "slides": [
+    {
+      "n": 1,
+      "tipo": "frase",
+      "titulo": "Post simples publicado ensina mais que post perfeito guardado",
+      "texto": "Fotografe com o celular o produto ou o serviço do dia e publique hoje. Na próxima semana, melhore o que perceber."
+    }
+  ],
+  "stories": [
+    {
+      "tipo": "chamada",
+      "texto": "Qual post você está adiando até ficar perfeito?"
+    }
+  ],
+  "enquete_manual": "Você já adiou um post esperando ficar perfeito? Sim, toda semana / Às vezes / Não, posto sem medo",
+  "fontes": [],
+  "legenda": "Post perfeito guardado no celular não alcança ninguém: consistência antes da perfeição.\n\nExemplo ilustrativo, não um caso real: uma manicure de bairro esperava o post perfeito, com luz ideal, cenário certo e legenda caprichada. Enquanto esperava, quase não postava.\nEla mudou o jeito: uma foto simples do trabalho do dia, publicada toda semana.\nO que aprendeu: um post simples publicado ensina mais que um perfeito que nunca sai.\nCada publicação mostra o que funciona, e a próxima pode ser um pouco melhor.\nFicou mais fácil manter a frequência, porque cada post virou uma tarefa de poucos minutos.\n\nQual post você está adiando? Publique uma versão simples hoje e conte nos comentários.",
+  "hashtags": [
+    "#empreendedorismo",
+    "#pequenosnegocios",
+    "#conteudoparainstagram",
+    "#consistencianasredes",
+    "#l3mktdigital"
+  ],
+  "alt_text": [
+    "Frase em destaque: 'Post simples publicado ensina mais que post perfeito guardado'. Texto de apoio: fotografe o produto ou serviço do dia e publique hoje; na próxima semana, melhore o que perceber.",
+    "Story com a pergunta 'Qual post você está adiando até ficar perfeito?' e a enquete sugerida no PR para postagem manual."
+  ]
+}

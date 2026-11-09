@@ -1,0 +1,14 @@
+{
+  "telegram": {
+    "partes": [
+      "cabecalho",
+      "imagens",
+      "video",
+      "roteiro",
+      "legenda",
+      "apoio"
+    ],
+    "estado": "enviado",
+    "enviado_em": "2026-11-09T18:32:46-03:00"
+  }
+}

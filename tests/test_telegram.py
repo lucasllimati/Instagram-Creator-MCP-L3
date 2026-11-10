@@ -57,8 +57,10 @@ def instalar(raiz, post, evento=False):
     return pasta
 
 
-def novo(raiz, cfg=SEM_STORIES, hoje=HOJE, ativa=True, dry_run=False, perfil="FIN"):
+def novo(raiz, cfg=SEM_STORIES, hoje=HOJE, ativa=True, dry_run=False, perfil="FIN", agora=None, respeitar_horario=False):
     return et.Entregador(
+        agora=agora,
+        respeitar_horario=respeitar_horario,
         perfil=perfil,
         raiz=raiz,
         hoje=hoje,
@@ -325,6 +327,66 @@ def test_conta_pausada_por_bloqueio_nao_recebe_entrega(raiz, post):
 def test_tema_entregue_conta_para_repeticao(post, ctx):
     ctx.publicacoes.append({"perfil": "FIN", "tema_slug": "juros-compostos", "data": "2026-10-01", "status": "entregue", "id": "x"})
     assert "repeticao" in {e.regra for e in validar.validar_post(post, ctx)}
+
+
+def as_(hora, minuto=0, dia=HOJE):
+    return dt.datetime(dia.year, dia.month, dia.day, hora, minuto, tzinfo=comum.TZ)
+
+
+@responses.activate
+def test_agendado_antes_do_horario_do_perfil_nao_envia(raiz, post):
+    instalar(raiz, post)
+    assert novo(raiz, agora=as_(8, 17), respeitar_horario=True).executar() == 0  # FIN é às 08:30
+    assert len(responses.calls) == 0
+
+
+@responses.activate
+def test_agendado_atrasado_depois_do_horario_envia(raiz, post):
+    ok_telegram()
+    instalar(raiz, post)
+    assert novo(raiz, agora=as_(18, 32), respeitar_horario=True).executar() == 0
+    assert estado_tg(raiz, post)["estado"] == "enviado"
+
+
+@responses.activate
+def test_merge_entrega_mesmo_antes_do_horario(raiz, post):
+    ok_telegram()
+    instalar(raiz, post)
+    assert novo(raiz, agora=as_(7, 0), respeitar_horario=False).executar() == 0
+    assert estado_tg(raiz, post)["estado"] == "enviado"
+
+
+@responses.activate
+def test_dia_perdido_vira_atrasado_e_nao_gera_dois_posts(raiz, post):
+    ok_telegram()
+    instalar(raiz, post)  # post de 09/11, nunca entregue
+    hoje = copy.deepcopy(post)
+    hoje.update(id="FIN-2026-11-10", data="2026-11-10", tema_slug="outro", legenda=post["legenda"] + " Hoje.")
+    hoje["hashtags"][0] = "#orcamento"
+    instalar(raiz, hoje)
+    ent = novo(raiz, hoje=dt.date(2026, 11, 10), agora=as_(9, 0, dt.date(2026, 11, 10)), respeitar_horario=True)
+    assert ent.executar() == 0
+    assert estado_tg(raiz, post)["estado"] == "atrasado"
+    assert estado_tg(raiz, hoje)["estado"] == "enviado"
+    assert any("atrasado" in t.lower() for t, _ in ent.notificador.issues)
+    assert publicar.legenda_final(post) not in textos()
+
+
+@responses.activate
+def test_reenvio_manual_de_dia_perdido_funciona(raiz, post):
+    ok_telegram()
+    pasta = instalar(raiz, post)
+    comum.gravar_json(pasta / "estado.json", {"telegram": {"estado": "atrasado"}})
+    assert novo(raiz, hoje=dt.date(2026, 11, 10)).executar(data_forcada=HOJE) == 0
+    assert estado_tg(raiz, post)["estado"] == "enviado"
+
+
+def test_entrega_desligada_termina_sem_erro_mesmo_sem_segredos(monkeypatch, capsys):
+    monkeypatch.setenv("GITHUB_ACTIONS", "true")
+    for nome in ("ENTREGA_TELEGRAM", "TELEGRAM_BOT_TOKEN", "TELEGRAM_CHAT_ID"):
+        monkeypatch.delenv(nome, raising=False)
+    assert et.main(["FIN"]) == 0
+    assert "ENTREGA_TELEGRAM" in capsys.readouterr().out
 
 
 def test_envio_real_fora_do_actions_exige_confirmacao(monkeypatch, capsys):

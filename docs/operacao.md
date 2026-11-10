@@ -49,6 +49,12 @@ Sem merge, nada é publicado.
 3. Na noite da decisão ou na manhã seguinte, rode `/evento copom`.
 4. Faça o merge do PR até 18:00 do dia do post.
 
+## Branches
+
+- **No GitHub:** a opção "Automatically delete head branches" está ligada, e a branch some no merge do PR.
+- **No computador:** `git config fetch.prune true` tira as referências remotas apagadas. Os comandos `/hoje`, `/semana`, `/evento` e `/noticia` apagam as branches locais já incorporadas ao começar.
+- **À mão:** `git checkout main && git pull && git branch --merged main` lista o que pode sair; apague com `git branch -d <nome>`. O `-d` recusa branch com trabalho ainda não incorporado.
+
 ## Pausar tudo
 
 ```bash

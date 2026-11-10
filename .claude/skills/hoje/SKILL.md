@@ -11,7 +11,7 @@ Passe caminhos aos agentes, não conteúdo colado. Leia `.claude/rules/conteudo.
 
 ## 1. Preparar
 
-1. Atualize `main` e crie a branch `hoje/AAAA-MM-DD`. Se ela existir, continue nela.
+1. Atualize `main` e crie a branch `hoje/AAAA-MM-DD`. Se ela existir, continue nela. Antes, rode `git checkout main`, `git pull` e apague as branches locais já incorporadas com `git branch -d` (o GitHub apaga as remotas no merge).
 2. Rode `python scripts/radar.py` e `python scripts/dados_economicos.py`. Se algum falhar, siga e registre.
 3. Rode `python scripts/hoje.py <perfis> --data <data>` e siga o campo `acao` de cada perfil:
 

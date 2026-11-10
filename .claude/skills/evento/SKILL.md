@@ -7,7 +7,7 @@ disable-model-invocation: true
 
 Crie o post de evento. Sem data, use hoje. **Não publique nada.** Leia `.claude/rules/atualidades.md`.
 
-1. **Branch:** `evento/AAAA-MM-DD-copom` a partir de `main`.
+1. **Branch:** `evento/AAAA-MM-DD-copom` a partir de `main`. Antes, rode `git checkout main`, `git pull` e apague as branches locais já incorporadas com `git branch -d` (o GitHub apaga as remotas no merge).
 2. **Dados:** `python scripts/dados_economicos.py --ate <dia seguinte à reunião>`. Se falhar, **pare e explique**; nunca use número de memória.
 3. **Esqueleto:** `python scripts/evento.py copom --reuniao <data>`. Ele cria `fila/<dia seguinte>/FIN-evento/` com os números da série.
 4. **Confirmação:** busque o comunicado oficial do Copom no site do Banco Central. Se o resultado divergir da série, pare e avise.

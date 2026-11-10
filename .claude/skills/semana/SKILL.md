@@ -9,7 +9,7 @@ Orquestre a semana indicada. Sem argumento, use a próxima semana ISO. **Não pu
 
 Antes de cada etapa, veja o que já existe e pule o que estiver pronto. Passe caminhos aos agentes, não conteúdo colado.
 
-1. **Branch:** `semana/AAAA-WW` a partir de `main`; se existir, continue nela.
+1. **Branch:** `semana/AAAA-WW` a partir de `main`; se existir, continue nela. Antes, rode `git checkout main`, `git pull` e apague as branches locais já incorporadas com `git branch -d` (o GitHub apaga as remotas no merge).
 2. **Dados:** `python scripts/pautar.py temas` e `python scripts/dados_economicos.py`. Se os dados falharem, siga sem eles e registre.
 3. **Analista:** agente `analista`, se houver dados em `relatorios/dados/` e o relatório da semana não existir.
 4. **Pesquisa:** agente `pesquisador`, se `pesquisa/semana-AAAA-WW.md` não existir.

@@ -143,23 +143,31 @@ def test_horarios_de_publicacao():
     assert crons == {"30 11 * * *", "30 15 * * *", "0 21 * * *"}
 
 
-def test_telegram_usa_os_mesmos_horarios_da_publicacao():
-    def crons(nome):
-        dados = yaml.safe_load((RAIZ / ".github" / "workflows" / f"{nome}.yml").read_text(encoding="utf-8"))
-        return {c["cron"] for c in dados[True]["schedule"]}
-
-    assert crons("telegram") == crons("publicar")
+def _telegram():
+    return yaml.safe_load((RAIZ / ".github" / "workflows" / "telegram.yml").read_text(encoding="utf-8"))
 
 
-def test_merge_de_post_em_main_dispara_a_entrega_dos_dois_perfis():
-    dados = yaml.safe_load((RAIZ / ".github" / "workflows" / "telegram.yml").read_text(encoding="utf-8"))
-    assert dados[True]["push"] == {"branches": ["main"], "paths": ["fila/**"]}
-    job = dados["jobs"]["entregar"]
-    assert "matrix" in job["strategy"]
-    assert "'[\"FIN\",\"MKT\"]'" in job["strategy"]["matrix"]["perfil"]
-    # Concorrência por perfil no job, para push e horário agendado não enviarem o mesmo post em paralelo.
-    assert job["concurrency"]["group"] == "telegram-${{ matrix.perfil }}"
-    assert job["concurrency"]["cancel-in-progress"] is False
+def test_telegram_roda_de_hora_em_hora_fora_do_minuto_cheio():
+    # O GitHub atrasa ou pula horários agendados; várias tentativas cobrem o atraso.
+    crons = {c["cron"] for c in _telegram()[True]["schedule"]}
+    assert crons == {"17 11-23 * * *", "17 0-2 * * *"}  # 08:17 a 23:17 em Brasília
+
+
+def test_execucao_agendada_respeita_o_horario_de_cada_perfil():
+    passo = _telegram()["jobs"]["entregar"]["steps"][-1]
+    assert "--respeitar-horario" in passo["run"]
+    assert 'EVENTO" = "schedule"' in passo["run"]
+
+
+def test_merge_de_post_em_main_dispara_a_entrega():
+    assert _telegram()[True]["push"] == {"branches": ["main"], "paths": ["fila/**"]}
+
+
+def test_telegram_serializa_todas_as_execucoes():
+    # Um job trata os dois perfis; uma fila única impede envio duplicado em paralelo.
+    dados = _telegram()
+    assert dados["concurrency"] == {"group": "telegram", "cancel-in-progress": False}
+    assert "strategy" not in dados["jobs"]["entregar"]
 
 
 def test_publicar_tem_concorrencia_por_perfil():

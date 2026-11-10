@@ -551,6 +551,11 @@ def main(argv=None) -> int:
         print("Publicação real só roda no GitHub Actions. Aqui, use --dry-run.")
         return 2
 
+    if not args.dry_run and os.environ.get("PUBLICACAO_ATIVA") != "true":
+        # Modo desligado não é erro: o workflow agendado termina verde sem pedir segredos.
+        print(f"[{args.perfil}] PUBLICACAO_ATIVA não é true; nada foi feito")
+        return 0
+
     token = os.environ.get(f"IG_TOKEN_{args.perfil}", "")
     ig_id = os.environ.get(f"IG_USER_ID_{args.perfil}", "")
     token_midia = os.environ.get("MEDIA_REPO_TOKEN", "")

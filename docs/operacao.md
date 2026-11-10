@@ -8,7 +8,8 @@
 | Domingo, 06:00 | Actions | Coleta de insights |
 | Domingo | Claude | `/semana`, que abre o PR |
 | Domingo, 10 a 15 min | Você | Revisa o PR e faz o merge |
-| Diário, 08:30 e 12:30 | Actions | Publica FIN e MKT, ou entrega no Telegram |
+| Diário, 08:30 e 12:30 | Actions | Publica FIN e MKT pela API |
+| De hora em hora, 08:17 a 23:17 | Actions | Entrega no Telegram o que já passou do horário do perfil |
 | Diário, 18:00 | Actions | FIN: só post de evento |
 
 ## Post sob demanda (`/hoje`)

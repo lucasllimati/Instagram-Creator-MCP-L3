@@ -135,7 +135,9 @@ class SemGit:
 
 
 class Entregador:
-    def __init__(self, perfil, raiz, hoje, telegram, git, notificador, cfg_rampa, ativa=True, dry_run=False, gerar_video=video.gerar_reel, segredos=()):
+    def __init__(self, perfil, raiz, hoje, telegram, git, notificador, cfg_rampa, ativa=True, dry_run=False, gerar_video=video.gerar_reel, segredos=(), agora=None, respeitar_horario=False):
+        self.agora = agora
+        self.respeitar_horario = respeitar_horario
         self.perfil = perfil
         self.raiz = Path(raiz)
         self.hoje = hoje
@@ -345,6 +347,31 @@ class Entregador:
         self._log(f"nada a entregar em {data} (janela {janela})")
         return 0
 
+    def _passou_horario(self) -> bool:
+        horario = self.cfg.get("horarios", {}).get(self.perfil)
+        if not horario:
+            return True
+        hora, minuto = map(int, horario.split(":"))
+        agora = self.agora or dt.datetime.now(comum.TZ)
+        return agora.time() >= dt.time(hora, minuto)
+
+    def _tratar_perdidos(self, excluir: dt.date) -> None:
+        """Post de dia anterior que não saiu vira atrasado: nunca dois posts no mesmo dia."""
+        for dias in range(1, 4):
+            data = self.hoje - dt.timedelta(days=dias)
+            if data == excluir:
+                continue
+            for evento in (False, True):
+                pasta, post = self._carregar(data, evento)
+                if not post or post.get("status") != "pronto" or self._situacao(pasta) not in ("pendente", "enviando"):
+                    continue
+                self._marcar(pasta, "atrasado")
+                self._issue(
+                    f"Post atrasado: {post['id']}",
+                    f"Não foi entregue em {post['data']}, provavelmente por atraso do agendamento do GitHub. "
+                    f"Para enviar mesmo assim, rode Actions > Entregar no Telegram com perfil {self.perfil} e data {post['data']}.",
+                )
+
     def executar(self, janela: str = "normal", data_forcada: dt.date | None = None) -> int:
         if not self.ativa and not self.dry_run:
             self._log("ENTREGA_TELEGRAM não é true; nada foi feito")
@@ -353,7 +380,13 @@ class Entregador:
             self._log("conta pausada em historico/contas_pausadas.json; nada foi feito")
             return 0
         try:
-            return self._dia(data_forcada or self.hoje, janela, bool(data_forcada))
+            data = data_forcada or self.hoje
+            if not self.dry_run:
+                self._tratar_perdidos(excluir=data)
+            if self.respeitar_horario and not data_forcada and not self._passou_horario():
+                self._log(f"ainda não é o horário de {self.perfil} ({self.cfg['horarios'][self.perfil]})")
+                return 0
+            return self._dia(data, janela, bool(data_forcada))
         except publicar.ErroEstado as e:
             self._issue("Falha ao salvar o estado da entrega", e)
         except Exception as e:  # qualquer falha vira alerta, sem vazar segredo
@@ -368,19 +401,25 @@ def main(argv=None) -> int:
     ap.add_argument("--confirmar-local", action="store_true", help="permite o envio real fora do GitHub Actions")
     ap.add_argument("--janela", choices=["normal", "evento"], default="normal")
     ap.add_argument("--data", type=dt.date.fromisoformat)
+    ap.add_argument("--respeitar-horario", action="store_true", help="só entrega depois do horário do perfil (execuções agendadas)")
     args = ap.parse_args(argv)
 
     no_actions = os.environ.get("GITHUB_ACTIONS") == "true"
     if not args.dry_run and not no_actions and not args.confirmar_local:
         print("Envio real fora do GitHub Actions exige --confirmar-local. Para testar, use --dry-run.")
         return 2
+    ativa = os.environ.get("ENTREGA_TELEGRAM") == "true" or args.confirmar_local
+    if not args.dry_run and not ativa:
+        # Modo desligado não é erro: o workflow agendado termina verde.
+        print(f"[{args.perfil}] ENTREGA_TELEGRAM não é true; nada foi feito")
+        return 0
     token = os.environ.get("TELEGRAM_BOT_TOKEN", "")
     chat = os.environ.get("TELEGRAM_CHAT_ID", "")
     if not args.dry_run and not (token and chat):
         print("Faltam as variáveis TELEGRAM_BOT_TOKEN e TELEGRAM_CHAT_ID.")
         return 2
-    ativa = os.environ.get("ENTREGA_TELEGRAM") == "true" or args.confirmar_local
     return Entregador(
+        respeitar_horario=args.respeitar_horario,
         perfil=args.perfil,
         raiz=comum.RAIZ,
         hoje=comum.hoje_sp(),

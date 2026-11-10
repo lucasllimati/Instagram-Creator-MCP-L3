@@ -6,7 +6,8 @@ Não precisa de conta na Meta. Calcule 10 minutos.
 
 ## Quando chega
 
-- **No horário de cada perfil:** FIN às 08:30, MKT às 12:30 e eventos de FIN às 18:00, para os posts aprovados com antecedência.
+- **A partir do horário de cada perfil:** FIN às 08:30 e MKT às 12:30, para os posts aprovados com antecedência. O workflow confere de hora em hora, das 08:17 às 23:17, porque o GitHub costuma atrasar horários agendados. Na prática, o post chega na primeira verificação depois do horário.
+- **Dia perdido:** se um post não sair no seu dia, ele não é enviado no dia seguinte junto com outro. Uma issue avisa, e você pode reenviar em **Actions > Entregar no Telegram**, com a data do post.
 - **No merge:** um post com a data de hoje, como os criados com `/hoje`, chega em poucos minutos depois da aprovação.
 
 ## O que chega no canal

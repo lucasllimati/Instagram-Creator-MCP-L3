@@ -1,12 +1,13 @@
 name: Entregar no Telegram
 
 on:
+  # De hora em hora, das 08:17 às 23:17 em Brasília, fora do minuto cheio.
+  # O GitHub atrasa ou pula horários agendados; cada execução entrega o que já
+  # passou do horário do perfil (config/limites.yaml) e ainda não foi enviado.
   schedule:
-    - cron: "30 11 * * *" # 08:30 BRT: FIN
-    - cron: "30 15 * * *" # 12:30 BRT: MKT
-    - cron: "0 21 * * *" # 18:00 BRT: FIN, só posts de evento
+    - cron: "17 11-23 * * *"
+    - cron: "17 0-2 * * *"
   # Merge de post em main: entrega na hora o que tiver a data de hoje (/hoje).
-  # Posts de outros dias continuam esperando o horário agendado.
   push:
     branches: [main]
     paths: ["fila/**"]
@@ -35,19 +36,16 @@ permissions:
   contents: write
   issues: write
 
+# Fila única: execuções nunca rodam em paralelo. Uma execução pendente
+# substituída por outra não faz falta, pois a seguinte cobre os dois perfis.
+concurrency:
+  group: telegram
+  cancel-in-progress: false
+
 jobs:
   entregar:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
-    strategy:
-      fail-fast: false
-      max-parallel: 1 # um perfil por vez evita conflito no commit de estado
-      matrix:
-        perfil: ${{ fromJSON(github.event_name == 'push' && '["FIN","MKT"]' || format('["{0}"]', inputs.perfil || (github.event.schedule == '30 15 * * *' && 'MKT' || 'FIN'))) }}
-    # Por perfil: um merge e um horário agendado nunca enviam o mesmo post em paralelo.
-    concurrency:
-      group: telegram-${{ matrix.perfil }}
-      cancel-in-progress: false
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -63,8 +61,9 @@ jobs:
           git config user.email "l3-telegram@users.noreply.github.com"
       - name: Entregar
         env:
-          PERFIL: ${{ matrix.perfil }}
-          JANELA: ${{ inputs.janela || (github.event.schedule == '0 21 * * *' && 'evento' || 'normal') }}
+          EVENTO: ${{ github.event_name }}
+          PERFIL: ${{ inputs.perfil }}
+          JANELA: ${{ inputs.janela || 'normal' }}
           DATA: ${{ inputs.data }}
           SIMULAR: ${{ inputs.dry_run }}
           ENTREGA_TELEGRAM: ${{ vars.ENTREGA_TELEGRAM }}
@@ -72,7 +71,13 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
-          args=("$PERFIL" --janela "$JANELA")
-          if [ -n "$DATA" ]; then args+=(--data "$DATA"); fi
-          if [ "$SIMULAR" = "true" ]; then args+=(--dry-run); fi
-          python scripts/entregar_telegram.py "${args[@]}"
+          if [ "$EVENTO" = "workflow_dispatch" ]; then perfis=("$PERFIL"); else perfis=(FIN MKT); fi
+          extra=(--janela "$JANELA")
+          if [ -n "$DATA" ]; then extra+=(--data "$DATA"); fi
+          if [ "$SIMULAR" = "true" ]; then extra+=(--dry-run); fi
+          if [ "$EVENTO" = "schedule" ]; then extra+=(--respeitar-horario); fi
+          falhou=0
+          for p in "${perfis[@]}"; do
+            python scripts/entregar_telegram.py "$p" "${extra[@]}" || falhou=1
+          done
+          exit $falhou

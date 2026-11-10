@@ -646,6 +646,15 @@ def test_erro_inesperado_abre_issue_sem_vazar_token(raiz, post):
     assert chamadas("media_publish") == []
 
 
+def test_publicacao_desligada_termina_sem_erro_mesmo_sem_segredos(monkeypatch, capsys):
+    # Com a Meta fora do ar, o workflow agendado não pode falhar todo dia por falta de segredo.
+    monkeypatch.setenv("GITHUB_ACTIONS", "true")
+    for nome in ("PUBLICACAO_ATIVA", "IG_TOKEN_FIN", "IG_USER_ID_FIN", "MEDIA_REPO_TOKEN"):
+        monkeypatch.delenv(nome, raising=False)
+    assert publicar.main(["FIN"]) == 0
+    assert "PUBLICACAO_ATIVA" in capsys.readouterr().out
+
+
 def test_publicacao_real_fora_do_actions_e_recusada(monkeypatch, capsys):
     monkeypatch.delenv("GITHUB_ACTIONS", raising=False)
     assert publicar.main(["FIN"]) == 2

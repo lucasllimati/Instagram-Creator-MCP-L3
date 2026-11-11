@@ -1,0 +1,108 @@
+{
+  "id": "FIN-2026-11-11",
+  "perfil": "FIN",
+  "data": "2026-11-11",
+  "pilar": "exemplo",
+  "formato": "carrossel",
+  "prioridade": "normal",
+  "titulo": "Reserva de emergência com R$ 300 por mês",
+  "tema_slug": "reserva-de-emergencia-300-por-mes",
+  "status": "pronto",
+  "hipotetico": true,
+  "fontes": [],
+  "enquete_manual": "Você já tem uma reserva de emergência? Já tenho / Estou começando",
+  "slides": [
+    {
+      "n": 1,
+      "tipo": "capa",
+      "titulo": "Reserva de emergência com R$ 300 por mês",
+      "texto": "O passo a passo, com números de exemplo"
+    },
+    {
+      "n": 2,
+      "tipo": "conteudo",
+      "titulo": "Passo 1: some seu custo mensal",
+      "texto": "Some moradia, comida, transporte, contas e saúde. Supondo que o total seja R$ 2.000 por mês, esse é o seu custo de vida."
+    },
+    {
+      "n": 3,
+      "tipo": "conteudo",
+      "titulo": "Passo 2: defina a meta",
+      "texto": "Escolha quantos meses de custo quer cobrir. Supondo 6 meses: R$ 2.000 x 6 = R$ 12.000."
+    },
+    {
+      "n": 4,
+      "tipo": "conteudo",
+      "titulo": "Passo 3: separe no dia do salário",
+      "texto": "Supondo R$ 300, guarde assim que o salário cair, antes de gastar. O que sobra no fim do mês costuma não sobrar."
+    },
+    {
+      "n": 5,
+      "tipo": "conteudo",
+      "titulo": "Quanto tempo leva",
+      "texto": "R$ 12.000 ÷ R$ 300 = 40 meses, ou 3 anos e 4 meses, sem contar rendimento. Se o dinheiro render, o prazo encurta, mas quanto encurta varia."
+    },
+    {
+      "n": 6,
+      "tipo": "conteudo",
+      "titulo": "Passo 4: quando usar",
+      "itens": [
+        "Usar: perda de renda, conserto urgente, despesa de saúde",
+        "Não usar: viagem, promoção, vontade de comprar",
+        "Usou? Volte a guardar até completar a meta"
+      ]
+    },
+    {
+      "n": 7,
+      "tipo": "conteudo",
+      "titulo": "Onde guardar: o que observar",
+      "itens": [
+        "Liquidez diária: dá para resgatar em pouco tempo",
+        "Baixo risco: o valor não deve oscilar muito",
+        "Custos: confira se há taxa ou prazo para sacar"
+      ]
+    },
+    {
+      "n": 8,
+      "tipo": "cta",
+      "titulo": "Resumo",
+      "texto": "Some o custo, multiplique pelos meses, separe um valor fixo todo mês e use só em emergência.",
+      "cta": "Salve para montar a sua"
+    }
+  ],
+  "stories": [
+    {
+      "tipo": "chamada",
+      "texto": "Reserva de emergência com R$ 300 por mês: veja o passo a passo no post de hoje"
+    }
+  ],
+  "narracao": [
+    "Dá para montar uma reserva de emergência guardando só trezentos reais por mês? Vou te mostrar a conta, passo a passo, com números de exemplo.",
+    "Primeiro, some o que você gasta por mês com o básico. Supondo que dê dois mil reais, esse é o seu custo de vida.",
+    "Agora escolha a meta. Supondo seis meses de custo: dois mil vezes seis dá doze mil reais.",
+    "Terceiro passo: separe os trezentos reais no dia que o salário cai. Guardar primeiro e gastar depois muda tudo.",
+    "Doze mil dividido por trezentos dá quarenta meses, mais de três anos, sem rendimento. Se o dinheiro render, esse prazo encurta.",
+    "Use a reserva só em emergência de verdade, como perder a renda ou um conserto urgente. Vontade de comprar não conta.",
+    "Ao escolher onde guardar, observe três coisas: se dá para resgatar rápido, se o valor oscila pouco e se há custo para sacar.",
+    "Resumindo: some o custo, multiplique pelos meses e guarde um valor fixo todo mês. Salva este vídeo para montar a sua."
+  ],
+  "legenda": "Reserva de emergência com R$ 300 por mês: veja a conta passo a passo.\n\nOs valores deste post são de exemplo, com números redondos para você acompanhar a conta.\nPasso a passo: some seu custo mensal, defina quantos meses quer cobrir e separe um valor fixo no dia do salário.\nUse a reserva só em emergência de verdade, como perda de renda ou conserto urgente.\nAo escolher onde guardar, observe liquidez, risco e custos para sacar.\n\nSalve o post e monte a sua reserva com os seus próprios números.\n\nConteúdo educativo, não é recomendação de investimento.",
+  "hashtags": [
+    "#financaspessoais",
+    "#dinheiro",
+    "#reservadeemergencia",
+    "#orcamentodomestico",
+    "#l3investir"
+  ],
+  "alt_text": [
+    "Capa com o título 'Reserva de emergência com R$ 300 por mês' e a frase 'O passo a passo, com números de exemplo'.",
+    "Slide 'Passo 1: some seu custo mensal'. Some moradia, comida, transporte, contas e saúde. Supondo custo de R$ 2.000 por mês.",
+    "Slide 'Passo 2: defina a meta'. Supondo 6 meses de cobertura, a meta é R$ 12.000.",
+    "Slide 'Passo 3: separe no dia do salário'. Supondo R$ 300 guardados assim que o salário cai, antes de gastar.",
+    "Slide 'Quanto tempo leva'. Com R$ 12.000 e R$ 300 por mês, são 40 meses, ou 3 anos e 4 meses, sem contar rendimento.",
+    "Slide 'Passo 4: quando usar'. Usar em perda de renda, conserto urgente ou despesa de saúde. Não usar em viagem, promoção ou vontade de comprar. Depois de usar, volte a guardar até completar a meta.",
+    "Slide 'Onde guardar: o que observar'. Três pontos: liquidez diária, baixo risco e custos ou prazo para sacar.",
+    "Resumo: some o custo, multiplique pelos meses, separe um valor fixo todo mês e use só em emergência. Chamada para salvar o post.",
+    "Story com a chamada 'Reserva de emergência com R$ 300 por mês: veja o passo a passo no post de hoje'."
+  ]
+}

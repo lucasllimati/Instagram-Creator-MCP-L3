@@ -7,6 +7,10 @@
     {
       "tema_slug": "inflacao-poder-de-compra",
       "data": "2026-11-09"
+    },
+    {
+      "tema_slug": "reserva-de-emergencia-300-por-mes",
+      "data": "2026-11-11"
     }
   ],
   "MKT": [
@@ -17,6 +21,10 @@
     {
       "tema_slug": "funil-de-vendas",
       "data": "2026-11-09"
+    },
+    {
+      "tema_slug": "30-dias-de-pauta-em-1-hora",
+      "data": "2026-11-11"
     }
   ]
 }

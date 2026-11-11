@@ -1,0 +1,101 @@
+{
+  "id": "MKT-2026-11-11",
+  "perfil": "MKT",
+  "data": "2026-11-11",
+  "pilar": "exemplo",
+  "formato": "carrossel",
+  "titulo": "30 dias de pauta em 1 hora",
+  "tema_slug": "30-dias-de-pauta-em-1-hora",
+  "status": "pronto",
+  "slides": [
+    {
+      "n": 1,
+      "tipo": "capa",
+      "titulo": "30 dias de pauta em 1 hora",
+      "texto": "Passo a passo com cronômetro"
+    },
+    {
+      "n": 2,
+      "tipo": "conteudo",
+      "titulo": "Minutos 0 a 10: escolha os assuntos",
+      "texto": "Exemplo: uma clínica de estética de bairro. Fixe 4 assuntos para repetir o mês todo.",
+      "itens": [
+        "Dúvidas de clientes",
+        "Bastidores",
+        "Antes e depois, com autorização do cliente",
+        "Oferta da semana"
+      ]
+    },
+    {
+      "n": 3,
+      "tipo": "conteudo",
+      "titulo": "Minutos 10 a 25: abra o WhatsApp",
+      "texto": "Releia as conversas e copie as perguntas que clientes já fazem. Pauta boa já está na sua caixa de mensagens."
+    },
+    {
+      "n": 4,
+      "tipo": "conteudo",
+      "titulo": "Minutos 25 a 40: 6 ideias por assunto",
+      "texto": "Em dúvidas de clientes, cada pergunta vira um post. Três exemplos:",
+      "itens": [
+        "Limpeza de pele dói?",
+        "Quanto tempo dura o efeito?",
+        "Quantas sessões eu preciso?"
+      ]
+    },
+    {
+      "n": 5,
+      "tipo": "conteudo",
+      "titulo": "Minutos 40 a 50: monte o calendário",
+      "texto": "Use papel, planilha ou app de notas. Um post por dia útil, girando os 4 assuntos. Fim de semana livre para imprevistos."
+    },
+    {
+      "n": 6,
+      "tipo": "conteudo",
+      "titulo": "Minutos 50 a 60: trave um horário",
+      "texto": "Reserve um horário fixo por semana para produzir. Sem hora marcada, a pauta pronta vira lista esquecida."
+    },
+    {
+      "n": 7,
+      "tipo": "cta",
+      "titulo": "Resumo",
+      "texto": "Quatro assuntos, perguntas reais do WhatsApp, um calendário simples e um horário fixo. Os tempos são sugestão: ajuste ao seu ritmo.",
+      "cta": "Salve e faça a sua hoje"
+    }
+  ],
+  "stories": [
+    {
+      "tipo": "chamada",
+      "texto": "Você sabe o que vai postar amanhã? Em 1 hora dá para planejar o mês."
+    }
+  ],
+  "enquete_manual": "Você já planeja os posts da semana? Sim, tenho calendário / Não, decido na hora",
+  "narracao": [
+    "Você acorda sem saber o que postar? Dá para resolver o mês inteiro em uma hora. Liga o cronômetro comigo.",
+    "Pense numa clínica de estética de bairro. Primeiro, escolha quatro assuntos fixos. Esses quatro vão se repetir o mês todo, sem você quebrar a cabeça.",
+    "Agora abra o WhatsApp. As perguntas que seus clientes já fazem são a melhor fonte de ideias. Você só precisa copiar.",
+    "Para cada assunto, liste seis ideias. São vinte e quatro no total. Em dúvidas, por exemplo, cada pergunta frequente vira um post inteiro.",
+    "Depois monte um calendário simples, em papel, planilha ou bloco de notas. Um post por dia útil, girando os quatro assuntos. Fim de semana fica livre para imprevistos.",
+    "Por último, marque um horário fixo na semana para produzir. Sem isso, a pauta fica só no papel.",
+    "Quatro assuntos, perguntas reais, calendário simples e horário fixo. Os tempos são sugestão. Salva esse post e faz a sua hoje."
+  ],
+  "fontes": [],
+  "legenda": "Pauta de conteúdo para 30 dias em 1 hora: o passo a passo com cronômetro.\n\nExemplo de uma clínica de estética de bairro: quatro assuntos fixos que se repetem o mês todo.\nO material já está no WhatsApp, nas perguntas que os clientes fazem.\nDepois, um calendário simples, em papel, planilha ou bloco de notas.\nE um horário fixo na semana para produzir, senão a pauta vira lista esquecida.\n\nSalve o post e faça a sua pauta hoje, em uma hora.",
+  "hashtags": [
+    "#redessociais",
+    "#pautadeconteudo",
+    "#calendarioeditorial",
+    "#planejamentodeconteudo",
+    "#l3mktdigital"
+  ],
+  "alt_text": [
+    "Capa com o título '30 dias de pauta em 1 hora' e a frase 'Passo a passo com cronômetro'.",
+    "Slide 'Minutos 0 a 10: escolha os assuntos'. Exemplo de clínica de estética de bairro: fixe 4 assuntos para repetir o mês todo. Lista: dúvidas de clientes, bastidores, antes e depois com autorização do cliente, oferta da semana.",
+    "Slide 'Minutos 10 a 25: abra o WhatsApp'. Releia as conversas e copie as perguntas que os clientes já fazem.",
+    "Slide 'Minutos 25 a 40: 6 ideias por assunto'. Cada pergunta de dúvidas de clientes vira um post. Exemplos: limpeza de pele dói?; quanto tempo dura o efeito?; quantas sessões eu preciso?",
+    "Slide 'Minutos 40 a 50: monte o calendário'. Use papel, planilha ou app de notas, com um post por dia útil, girando os 4 assuntos.",
+    "Slide 'Minutos 50 a 60: trave um horário'. Reserve um horário fixo por semana para produzir.",
+    "Resumo: quatro assuntos, perguntas reais do WhatsApp, calendário simples e horário fixo. Chamada para salvar e fazer a pauta hoje.",
+    "Story com a chamada 'Você sabe o que vai postar amanhã? Em 1 hora dá para planejar o mês.'"
+  ]
+}
